@@ -61,6 +61,75 @@ public class UnityRestClient : MonoBehaviour
         public Dictionary<string, object> metadata;
     }
 
+    [Serializable]
+    public class MatchmakingTicket
+    {
+        public string ticketId;
+        public string status;
+        public List<long> playerIds;
+        public string playlist;
+        public float waitTime;
+        public string matchId;
+        public string serverInfo;
+        public Dictionary<string, object> metadata;
+    }
+
+    [Serializable]
+    public class CustomMap
+    {
+        public string mapId;
+        public string name;
+        public string author;
+        public string description;
+        public string gameMode;
+        public int maxPlayers;
+        public float rating;
+        public int downloads;
+        public string thumbnailUrl;
+        public Dictionary<string, object> forgeData;
+        public List<string> tags;
+    }
+
+    [Serializable]
+    public class LeaderboardEntry
+    {
+        public int rank;
+        public long playerId;
+        public string gamertag;
+        public string serviceTag;
+        public float value;
+        public string statType;
+        public Dictionary<string, object> additionalStats;
+    }
+
+    [Serializable]
+    public class MatchResult
+    {
+        public string matchId;
+        public string gameMode;
+        public string map;
+        public long timestamp;
+        public int duration;
+        public List<PlayerMatchStats> players;
+        public string winningTeam;
+        public Dictionary<string, object> gameStats;
+    }
+
+    [Serializable]
+    public class PlayerMatchStats
+    {
+        public long playerId;
+        public string gamertag;
+        public int kills;
+        public int deaths;
+        public int assists;
+        public float score;
+        public string team;
+        public bool won;
+        public Dictionary<string, int> medals;
+        public Dictionary<string, int> weaponKills;
+    }
+
     public class PlayerStats
     {
         public long playerId;
@@ -216,6 +285,206 @@ public class UnityRestClient : MonoBehaviour
                     PlayerStats stats = JsonUtility.FromJson<PlayerStats>(response.data);
                     apiResponse.success = true;
                     apiResponse.data = stats;
+                }
+                catch (Exception e)
+                {
+                    apiResponse.success = false;
+                    apiResponse.error = e.Message;
+                }
+            }
+            else
+            {
+                apiResponse.success = false;
+                apiResponse.error = response.error;
+            }
+            
+            callback?.Invoke(apiResponse);
+        }));
+    }
+
+    // Matchmaking Methods
+    public void JoinMatchmakingQueue(string playlist, List<long> playerIds, Action<ApiResponse<MatchmakingTicket>> callback)
+    {
+        string queryParams = $"?playlist={playlist}";
+        foreach (var playerId in playerIds)
+        {
+            queryParams += $"&playerIds={playerId}";
+        }
+        
+        StartCoroutine(PostRequest($"/halo/matchmaking/queue{queryParams}", "", (response) =>
+        {
+            ApiResponse<MatchmakingTicket> apiResponse = new ApiResponse<MatchmakingTicket>();
+            apiResponse.statusCode = response.statusCode;
+            apiResponse.responseTime = response.responseTime;
+            apiResponse.headers = response.headers;
+            
+            if (response.success)
+            {
+                try
+                {
+                    MatchmakingTicket ticket = JsonUtility.FromJson<MatchmakingTicket>(response.data);
+                    apiResponse.success = true;
+                    apiResponse.data = ticket;
+                }
+                catch (Exception e)
+                {
+                    apiResponse.success = false;
+                    apiResponse.error = e.Message;
+                }
+            }
+            else
+            {
+                apiResponse.success = false;
+                apiResponse.error = response.error;
+            }
+            
+            callback?.Invoke(apiResponse);
+        }));
+    }
+
+    public void GetMatchmakingStatus(string ticketId, Action<ApiResponse<MatchmakingTicket>> callback)
+    {
+        StartCoroutine(GetRequest($"/halo/matchmaking/status/{ticketId}", (response) =>
+        {
+            ApiResponse<MatchmakingTicket> apiResponse = new ApiResponse<MatchmakingTicket>();
+            apiResponse.statusCode = response.statusCode;
+            apiResponse.responseTime = response.responseTime;
+            apiResponse.headers = response.headers;
+            
+            if (response.success)
+            {
+                try
+                {
+                    MatchmakingTicket ticket = JsonUtility.FromJson<MatchmakingTicket>(response.data);
+                    apiResponse.success = true;
+                    apiResponse.data = ticket;
+                }
+                catch (Exception e)
+                {
+                    apiResponse.success = false;
+                    apiResponse.error = e.Message;
+                }
+            }
+            else
+            {
+                apiResponse.success = false;
+                apiResponse.error = response.error;
+            }
+            
+            callback?.Invoke(apiResponse);
+        }));
+    }
+
+    // Map/Forge Methods
+    public void BrowseMaps(string gameMode, int minRating, Action<ApiResponse<List<CustomMap>>> callback)
+    {
+        string queryParams = "";
+        if (!string.IsNullOrEmpty(gameMode))
+            queryParams += $"?mode={gameMode}";
+        if (minRating > 0)
+            queryParams += (queryParams.Length > 0 ? "&" : "?") + $"rating={minRating}";
+            
+        StartCoroutine(GetRequest($"/halo/maps/browse{queryParams}", (response) =>
+        {
+            ApiResponse<List<CustomMap>> apiResponse = new ApiResponse<List<CustomMap>>();
+            apiResponse.statusCode = response.statusCode;
+            apiResponse.responseTime = response.responseTime;
+            apiResponse.headers = response.headers;
+            
+            if (response.success)
+            {
+                try
+                {
+                    string wrappedJson = "{\"items\":" + response.data + "}";
+                    Wrapper<CustomMap> wrapper = JsonUtility.FromJson<Wrapper<CustomMap>>(wrappedJson);
+                    apiResponse.success = true;
+                    apiResponse.data = wrapper.items;
+                }
+                catch (Exception e)
+                {
+                    apiResponse.success = false;
+                    apiResponse.error = e.Message;
+                }
+            }
+            else
+            {
+                apiResponse.success = false;
+                apiResponse.error = response.error;
+            }
+            
+            callback?.Invoke(apiResponse);
+        }));
+    }
+
+    public void UploadMap(CustomMap map, Action<ApiResponse<string>> callback)
+    {
+        string json = JsonUtility.ToJson(map);
+        StartCoroutine(PostRequest("/halo/maps/upload", json, (response) =>
+        {
+            ApiResponse<string> apiResponse = new ApiResponse<string>();
+            apiResponse.statusCode = response.statusCode;
+            apiResponse.responseTime = response.responseTime;
+            apiResponse.headers = response.headers;
+            apiResponse.success = response.success;
+            apiResponse.data = response.data;
+            apiResponse.error = response.error;
+            callback?.Invoke(apiResponse);
+        }));
+    }
+
+    // Leaderboard Methods
+    public void GetLeaderboard(string statType, int limit, Action<ApiResponse<List<LeaderboardEntry>>> callback)
+    {
+        StartCoroutine(GetRequest($"/halo/leaderboard/{statType}?limit={limit}", (response) =>
+        {
+            ApiResponse<List<LeaderboardEntry>> apiResponse = new ApiResponse<List<LeaderboardEntry>>();
+            apiResponse.statusCode = response.statusCode;
+            apiResponse.responseTime = response.responseTime;
+            apiResponse.headers = response.headers;
+            
+            if (response.success)
+            {
+                try
+                {
+                    string wrappedJson = "{\"items\":" + response.data + "}";
+                    Wrapper<LeaderboardEntry> wrapper = JsonUtility.FromJson<Wrapper<LeaderboardEntry>>(wrappedJson);
+                    apiResponse.success = true;
+                    apiResponse.data = wrapper.items;
+                }
+                catch (Exception e)
+                {
+                    apiResponse.success = false;
+                    apiResponse.error = e.Message;
+                }
+            }
+            else
+            {
+                apiResponse.success = false;
+                apiResponse.error = response.error;
+            }
+            
+            callback?.Invoke(apiResponse);
+        }));
+    }
+
+    // Match History Methods
+    public void GetMatchHistory(long playerId, int limit, Action<ApiResponse<List<MatchResult>>> callback)
+    {
+        StartCoroutine(GetRequest($"/halo/player/{playerId}/matches?limit={limit}", (response) =>
+        {
+            ApiResponse<List<MatchResult>> apiResponse = new ApiResponse<List<MatchResult>>();
+            apiResponse.statusCode = response.statusCode;
+            apiResponse.responseTime = response.responseTime;
+            apiResponse.headers = response.headers;
+            
+            if (response.success)
+            {
+                try
+                {
+                    string wrappedJson = "{\"items\":" + response.data + "}";
+                    Wrapper<MatchResult> wrapper = JsonUtility.FromJson<Wrapper<MatchResult>>(wrappedJson);
+                    apiResponse.success = true;
+                    apiResponse.data = wrapper.items;
                 }
                 catch (Exception e)
                 {
