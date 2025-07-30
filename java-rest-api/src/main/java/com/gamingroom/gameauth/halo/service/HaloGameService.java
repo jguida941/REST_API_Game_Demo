@@ -257,6 +257,44 @@ public class HaloGameService {
         
         return ticket;
     }
+    
+    /**
+     * Get all weapons from the database
+     * 
+     * @return Map of all weapons
+     */
+    public Map<String, Weapon> getAllWeapons() {
+        return WeaponDatabase.getAllWeapons();
+    }
+    
+    /**
+     * Get a specific weapon by ID
+     * 
+     * @param weaponId The weapon ID
+     * @return The weapon or null if not found
+     */
+    public Weapon getWeapon(String weaponId) {
+        return WeaponDatabase.getWeapon(weaponId);
+    }
+    
+    /**
+     * Get weapons by type
+     * 
+     * @param type The weapon type
+     * @return List of weapons of that type
+     */
+    public List<Weapon> getWeaponsByType(Weapon.WeaponType type) {
+        return WeaponDatabase.getWeaponsByType(type);
+    }
+    
+    /**
+     * Get all power weapons
+     * 
+     * @return List of power weapons
+     */
+    public List<Weapon> getPowerWeapons() {
+        return WeaponDatabase.getPowerWeapons();
+    }
 }
 
 /**

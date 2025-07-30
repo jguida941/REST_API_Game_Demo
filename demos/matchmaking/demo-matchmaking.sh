@@ -31,7 +31,7 @@ QUEUE_REQUEST='{
 }'
 
 echo "Joining matchmaking queue..."
-QUEUE_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:admin \
+QUEUE_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:password \
     -X POST "$BASE_URL/halo/matchmaking/queue" \
     -H "Content-Type: application/json" \
     -d "$QUEUE_REQUEST")
@@ -56,7 +56,7 @@ echo ""
 # Test 2: Queue Status Monitoring
 echo -e "${YELLOW}2. Testing Queue Status Algorithm${NC}"
 sleep 1
-STATUS_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:admin \
+STATUS_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:password \
     "$BASE_URL/halo/matchmaking/status?playerId=985752863")
 
 HTTP_CODE=$(echo "$STATUS_RESPONSE" | grep "HTTP_CODE" | cut -d: -f2)
@@ -102,7 +102,7 @@ for i in "${!PLAYER_IDS[@]}"; do
 EOF
 )
     
-    MULTI_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:admin \
+    MULTI_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:password \
         -X POST "$BASE_URL/halo/matchmaking/queue" \
         -H "Content-Type: application/json" \
         -d "$MULTI_QUEUE_REQUEST")
@@ -131,7 +131,7 @@ echo -e "${YELLOW}4. Testing Team Balance Algorithm${NC}"
 echo "Analyzing team composition and balance..."
 
 # Get current queue state
-QUEUE_STATE=$(curl -s -u admin:admin "$BASE_URL/halo/matchmaking/queue/state")
+QUEUE_STATE=$(curl -s -u admin:password "$BASE_URL/halo/matchmaking/queue/state")
 echo "Current queue state analysis:"
 
 echo ""
@@ -162,7 +162,7 @@ MATCH_REQUEST='{
     "prioritizeWaitTime": true
 }'
 
-MATCH_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:admin \
+MATCH_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:password \
     -X POST "$BASE_URL/halo/matchmaking/create" \
     -H "Content-Type: application/json" \
     -d "$MATCH_REQUEST")
@@ -199,7 +199,7 @@ OPTIMIZATION_REQUESTS=10
 
 echo "Running queue optimization analysis..."
 for i in $(seq 1 $OPTIMIZATION_REQUESTS); do
-    curl -s -u admin:admin "$BASE_URL/halo/matchmaking/optimize" > /dev/null
+    curl -s -u admin:password "$BASE_URL/halo/matchmaking/optimize" > /dev/null
     echo -n "."
 done
 
@@ -233,7 +233,7 @@ PARTY_REQUEST='{
     "keepPartyTogether": true
 }'
 
-PARTY_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:admin \
+PARTY_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:password \
     -X POST "$BASE_URL/halo/matchmaking/party" \
     -H "Content-Type: application/json" \
     -d "$PARTY_REQUEST")
@@ -266,7 +266,7 @@ TOTAL_TIME=0
 BENCHMARK_REQUESTS=5
 
 for i in $(seq 1 $BENCHMARK_REQUESTS); do
-    START_TIME=$(date +%s%N)
+    START_TIME=$(date +%s)
     
     BENCHMARK_QUEUE='{
         "playerId": '$(( 985752863 + i ))',
@@ -274,12 +274,12 @@ for i in $(seq 1 $BENCHMARK_REQUESTS); do
         "maxWaitTime": 60
     }'
     
-    curl -s -u admin:admin \
+    curl -s -u admin:password \
         -X POST "$BASE_URL/halo/matchmaking/queue" \
         -H "Content-Type: application/json" \
         -d "$BENCHMARK_QUEUE" > /dev/null
     
-    END_TIME=$(date +%s%N)
+    END_TIME=$(date +%s)
     DURATION=$(( (END_TIME - START_TIME) / 1000000 ))
     TOTAL_TIME=$((TOTAL_TIME + DURATION))
     
@@ -294,7 +294,7 @@ echo ""
 # Cleanup - Leave queues
 echo -e "${YELLOW}9. Cleanup - Leaving Queues${NC}"
 for player_id in "${PLAYER_IDS[@]}"; do
-    curl -s -u admin:admin \
+    curl -s -u admin:password \
         -X DELETE "$BASE_URL/halo/matchmaking/queue?playerId=$player_id" > /dev/null
 done
 echo "✅ All players removed from queues"

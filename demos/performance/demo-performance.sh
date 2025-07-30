@@ -120,9 +120,9 @@ for endpoint_data in "${endpoints[@]}"; do
     
     echo -ne "${GRAY}Testing ${WHITE}$name${GRAY}...${RESET}"
     
-    START_TIME=$(date +%s%N)
-    RESPONSE=$(curl -s -w "\nTIME:%{time_total}" -u admin:admin "$BASE_URL$endpoint" 2>/dev/null)
-    END_TIME=$(date +%s%N)
+    START_TIME=$(date +%s)
+    RESPONSE=$(curl -s -w "\nTIME:%{time_total}" -u admin:password "$BASE_URL$endpoint" 2>/dev/null)
+    END_TIME=$(date +%s)
     
     RESPONSE_TIME=$(echo "$RESPONSE" | grep "TIME:" | cut -d: -f2)
     DURATION_MS=$(echo "scale=2; ($END_TIME - $START_TIME) / 1000000" | bc)
@@ -163,11 +163,11 @@ for users in "${CONCURRENT_USERS[@]}"; do
     MAX_TIME=0
     
     for ((i=1; i<=users && i<=10; i++)); do
-        START=$(date +%s%N)
-        if curl -s -u admin:admin "$BASE_URL$TARGET_ENDPOINT" > /dev/null 2>&1; then
+        START=$(date +%s)
+        if curl -s -u admin:password "$BASE_URL$TARGET_ENDPOINT" > /dev/null 2>&1; then
             ((SUCCESS++))
         fi
-        END=$(date +%s%N)
+        END=$(date +%s)
         
         DURATION=$(( (END - START) / 1000000 ))
         TOTAL_TIME=$((TOTAL_TIME + DURATION))

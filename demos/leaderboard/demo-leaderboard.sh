@@ -135,7 +135,7 @@ echo ""
 echo -e "${BOLD}${BG_BLUE}${WHITE} TEST 1: SINGLE CRITERION LEADERBOARD ${RESET}"
 animate_progress "Fetching kill leaderboard"
 
-KILLS_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:admin \
+KILLS_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:password \
     "$BASE_URL/halo/leaderboard/KILLS?page=0&size=5")
 
 HTTP_CODE=$(echo "$KILLS_RESPONSE" | grep "HTTP_CODE:" | cut -d: -f2)

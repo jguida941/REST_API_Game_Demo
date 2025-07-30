@@ -25,7 +25,7 @@ echo ""
 echo -e "${YELLOW}1. Testing Map Browse & Filter Algorithm${NC}"
 echo "Browsing available custom maps..."
 
-BROWSE_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:admin \
+BROWSE_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:password \
     "$BASE_URL/halo/maps/browse?page=0&size=10&sortBy=rating&order=desc")
 
 HTTP_CODE=$(echo "$BROWSE_RESPONSE" | grep "HTTP_CODE" | cut -d: -f2)
@@ -79,7 +79,7 @@ MAP_UPLOAD_DATA='{
     "visibility": "PUBLIC"
 }'
 
-UPLOAD_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:admin \
+UPLOAD_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:password \
     -X POST "$BASE_URL/halo/maps/upload" \
     -H "Content-Type: application/json" \
     -d "$MAP_UPLOAD_DATA")
@@ -141,7 +141,7 @@ for i in "${!RATINGS[@]}"; do
 EOF
 )
     
-    RATING_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:admin \
+    RATING_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:password \
         -X POST "$BASE_URL/halo/maps/$MAP_ID/rate" \
         -H "Content-Type: application/json" \
         -d "$RATING_DATA")
@@ -169,7 +169,7 @@ echo ""
 echo -e "${YELLOW}4. Testing Map Recommendation Algorithm${NC}"
 echo "Getting personalized map recommendations..."
 
-RECOMMENDATIONS_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:admin \
+RECOMMENDATIONS_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:password \
     "$BASE_URL/halo/maps/recommendations?playerId=985752863&gameMode=TEAM_SLAYER&limit=5")
 
 HTTP_CODE=$(echo "$RECOMMENDATIONS_RESPONSE" | grep "HTTP_CODE" | cut -d: -f2)
@@ -197,7 +197,7 @@ echo ""
 echo -e "${YELLOW}5. Testing Map Analytics Algorithm${NC}"
 echo "Analyzing map performance metrics..."
 
-ANALYTICS_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:admin \
+ANALYTICS_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:password \
     "$BASE_URL/halo/maps/$MAP_ID/analytics")
 
 HTTP_CODE=$(echo "$ANALYTICS_RESPONSE" | grep "HTTP_CODE" | cut -d: -f2)
@@ -231,7 +231,7 @@ for i in "${!SEARCH_QUERIES[@]}"; do
     QUERY=${SEARCH_QUERIES[$i]}
     TYPE=${SEARCH_TYPES[$i]}
     
-    SEARCH_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:admin \
+    SEARCH_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:password \
         "$BASE_URL/halo/maps/search?q=$QUERY&type=$TYPE&limit=3")
     
     HTTP_CODE=$(echo "$SEARCH_RESPONSE" | grep "HTTP_CODE" | cut -d: -f2)
@@ -271,7 +271,7 @@ INVALID_MAP='{
     }
 }'
 
-VALIDATION_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:admin \
+VALIDATION_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:password \
     -X POST "$BASE_URL/halo/maps/validate" \
     -H "Content-Type: application/json" \
     -d "$INVALID_MAP")
@@ -302,9 +302,9 @@ TOTAL_TIME=0
 BENCHMARK_REQUESTS=5
 
 for i in $(seq 1 $BENCHMARK_REQUESTS); do
-    START_TIME=$(date +%s%N)
-    curl -s -u admin:admin "$BASE_URL/halo/maps/browse?page=0&size=10" > /dev/null
-    END_TIME=$(date +%s%N)
+    START_TIME=$(date +%s)
+    curl -s -u admin:password "$BASE_URL/halo/maps/browse?page=0&size=10" > /dev/null
+    END_TIME=$(date +%s)
     
     DURATION=$(( (END_TIME - START_TIME) / 1000000 ))
     TOTAL_TIME=$((TOTAL_TIME + DURATION))

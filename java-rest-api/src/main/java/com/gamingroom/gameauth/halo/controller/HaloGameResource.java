@@ -346,24 +346,61 @@ public class HaloGameResource {
     @GET
     @Path("/weapons")
     public Response getWeaponMetadata() {
-        // For now, return static weapon data
-        // In production, this could be configurable
-        Map<String, Object> weapons = new HashMap<>();
-        
-        Map<String, Object> battleRifle = new HashMap<>();
-        battleRifle.put("damage", 6.0);
-        battleRifle.put("fireRate", 2.4);
-        battleRifle.put("magazineSize", 36);
-        battleRifle.put("burstCount", 3);
-        weapons.put("BattleRifle", battleRifle);
-        
-        Map<String, Object> sniper = new HashMap<>();
-        sniper.put("damage", 80.0);
-        sniper.put("fireRate", 0.5);
-        sniper.put("magazineSize", 4);
-        sniper.put("headshotMultiplier", 2.5);
-        weapons.put("Sniper", sniper);
-        
-        return Response.ok(weapons).build();
+        // Return all weapons from the database
+        return Response.ok(gameService.getAllWeapons()).build();
+    }
+    
+    /**
+     * GET /halo/weapons/{id}
+     * 
+     * Get specific weapon details
+     * 
+     * @param weaponId The weapon ID
+     * @return Weapon details
+     */
+    @GET
+    @Path("/weapons/{id}")
+    public Response getWeapon(@PathParam("id") String weaponId) {
+        Weapon weapon = gameService.getWeapon(weaponId);
+        if (weapon == null) {
+            return Response.status(Response.Status.NOT_FOUND)
+                          .entity("Weapon not found")
+                          .build();
+        }
+        return Response.ok(weapon).build();
+    }
+    
+    /**
+     * GET /halo/weapons/type/{type}
+     * 
+     * Get weapons by type (KINETIC, PLASMA, etc)
+     * 
+     * @param type The weapon type
+     * @return List of weapons
+     */
+    @GET
+    @Path("/weapons/type/{type}")
+    public Response getWeaponsByType(@PathParam("type") String type) {
+        try {
+            Weapon.WeaponType weaponType = Weapon.WeaponType.valueOf(type.toUpperCase());
+            return Response.ok(gameService.getWeaponsByType(weaponType)).build();
+        } catch (IllegalArgumentException e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                          .entity("Invalid weapon type")
+                          .build();
+        }
+    }
+    
+    /**
+     * GET /halo/weapons/power
+     * 
+     * Get all power weapons
+     * 
+     * @return List of power weapons
+     */
+    @GET
+    @Path("/weapons/power")
+    public Response getPowerWeapons() {
+        return Response.ok(gameService.getPowerWeapons()).build();
     }
 }

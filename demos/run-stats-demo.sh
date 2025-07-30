@@ -189,7 +189,7 @@ echo ""
 
 # Show loading animation
 (
-    STATS_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}\nTIME:%{time_total}" -u admin:admin "$BASE_URL/halo/player/$PLAYER_ID/stats")
+    STATS_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}\nTIME:%{time_total}" -u admin:password "$BASE_URL/halo/player/$PLAYER_ID/stats")
     echo "$STATS_RESPONSE" > /tmp/stats_response.tmp
 ) &
 PID=$!
@@ -330,7 +330,7 @@ echo -e "${BRIGHT_GREEN}└─────────────────�
 echo ""
 echo -ne "${BRIGHT_BLUE}Updating player statistics...${RESET}"
 
-UPDATE_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:admin \
+UPDATE_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:password \
     -X POST "$BASE_URL/halo/player/stats/update" \
     -H "Content-Type: application/json" \
     -d "$UPDATE_DATA")

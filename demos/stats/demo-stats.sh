@@ -22,7 +22,7 @@ echo ""
 
 # Test 1: Basic Player Stats Retrieval
 echo -e "${YELLOW}1. Testing Player Statistics Retrieval Algorithm${NC}"
-PLAYER_STATS=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:admin "$BASE_URL/halo/player/985752863/stats")
+PLAYER_STATS=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:password "$BASE_URL/halo/player/985752863/stats")
 HTTP_CODE=$(echo "$PLAYER_STATS" | grep "HTTP_CODE" | cut -d: -f2)
 RESPONSE_BODY=$(echo "$PLAYER_STATS" | sed '/HTTP_CODE/d')
 
@@ -72,7 +72,7 @@ UPDATE_DATA='{
 }'
 
 echo "Sending match result for statistical update..."
-UPDATE_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:admin \
+UPDATE_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:password \
     -X POST "$BASE_URL/halo/player/stats/update" \
     -H "Content-Type: application/json" \
     -d "$UPDATE_DATA")
@@ -106,7 +106,7 @@ PLAYERS=(985752863 985752864 985752865)
 declare -A PLAYER_DATA
 
 for player_id in "${PLAYERS[@]}"; do
-    STATS=$(curl -s -u admin:admin "$BASE_URL/halo/player/$player_id/stats")
+    STATS=$(curl -s -u admin:password "$BASE_URL/halo/player/$player_id/stats")
     PLAYER_DATA[$player_id]="$STATS"
     
     GAMERTAG=$(echo "$STATS" | grep -o '"gamertag":"[^"]*"' | cut -d'"' -f4)
@@ -129,7 +129,7 @@ echo -e "${YELLOW}4. Testing Performance Metrics Algorithms${NC}"
 echo "Calculating advanced performance metrics..."
 
 # Simulate match history analysis
-MATCH_HISTORY=$(curl -s -u admin:admin "$BASE_URL/halo/player/985752863/matches?limit=10")
+MATCH_HISTORY=$(curl -s -u admin:password "$BASE_URL/halo/player/985752863/matches?limit=10")
 echo "Recent match performance analysis:"
 
 if echo "$MATCH_HISTORY" | grep -q "matches"; then
@@ -152,7 +152,7 @@ echo -e "${YELLOW}5. Testing Statistical Aggregation Algorithms${NC}"
 echo "Computing server-wide statistics..."
 
 # Get weapon statistics
-WEAPON_STATS=$(curl -s -u admin:admin "$BASE_URL/halo/stats/weapons/usage")
+WEAPON_STATS=$(curl -s -u admin:password "$BASE_URL/halo/stats/weapons/usage")
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}✅ Weapon usage statistics computed${NC}"
     echo "Analyzing weapon meta algorithms..."
@@ -175,7 +175,7 @@ echo -e "${YELLOW}6. Testing Skill Rating Algorithm (ELO-based)${NC}"
 echo "Simulating skill rating calculation..."
 
 # Get current rating
-CURRENT_RATING=$(curl -s -u admin:admin "$BASE_URL/halo/player/985752863/rating" 2>/dev/null)
+CURRENT_RATING=$(curl -s -u admin:password "$BASE_URL/halo/player/985752863/rating" 2>/dev/null)
 
 echo "Current Implementation Features:"
 echo "✅ ELO-based skill calculation"
@@ -193,9 +193,9 @@ TOTAL_TIME=0
 REQUESTS=5
 
 for i in $(seq 1 $REQUESTS); do
-    START_TIME=$(date +%s%N)
-    curl -s -u admin:admin "$BASE_URL/halo/player/985752863/stats" > /dev/null
-    END_TIME=$(date +%s%N)
+    START_TIME=$(date +%s)
+    curl -s -u admin:password "$BASE_URL/halo/player/985752863/stats" > /dev/null
+    END_TIME=$(date +%s)
     
     DURATION=$(( (END_TIME - START_TIME) / 1000000 ))
     TOTAL_TIME=$((TOTAL_TIME + DURATION))

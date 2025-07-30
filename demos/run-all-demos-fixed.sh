@@ -38,7 +38,6 @@ BG_WHITE='\033[107m'
 
 # Configuration
 BASE_URL="http://localhost:8080"
-export BASE_URL
 LOG_DIR="logs"
 mkdir -p "$LOG_DIR"
 
@@ -199,52 +198,6 @@ EOF
     echo
 }
 
-# LOGIN SYSTEM - REAL AUTHENTICATION
-authenticate_user() {
-    echo
-    draw_advanced_box 70 "SYSTEM LOGIN" "$MAGENTA"
-    echo
-    
-    echo -e "${CYAN}${BOLD}Please login to access the Halo Backend System${RESET}"
-    echo -e "${DIM}Available users: admin, player, user, guest${RESET}"
-    echo
-    
-    # Get username
-    echo -ne "${YELLOW}Username: ${RESET}"
-    read -r USERNAME
-    
-    # Get password (hidden input)
-    echo -ne "${YELLOW}Password: ${RESET}"
-    read -s PASSWORD
-    echo
-    
-    # Test authentication
-    echo -ne "\n${CYAN}Authenticating...${RESET} "
-    AUTH_TEST=$(curl -s -w "\\nHTTP_CODE:%{http_code}" -u "$USERNAME:password" "$BASE_URL/halo/player/985752863/stats" 2>/dev/null)
-    HTTP_CODE=$(echo "$AUTH_TEST" | grep "HTTP_CODE" | cut -d: -f2)
-    
-    if [ "$HTTP_CODE" = "200" ]; then
-        echo -e "${GREEN}✓ Authentication successful!${RESET}"
-        export DEMO_USERNAME="$USERNAME"
-        export DEMO_PASSWORD="password"
-        export DEMO_CREDENTIALS="$USERNAME:password"
-        
-        # Extract player info
-        PLAYER_DATA=$(echo "$AUTH_TEST" | sed '/HTTP_CODE/d')
-        PLAYER_ID=$(echo "$PLAYER_DATA" | jq -r '.playerId // "985752863"' 2>/dev/null)
-        GAMERTAG=$(echo "$PLAYER_DATA" | jq -r '.gamertag // "'$USERNAME'"' 2>/dev/null)
-        export DEMO_PLAYER_ID="$PLAYER_ID"
-        export DEMO_GAMERTAG="$GAMERTAG"
-        
-        echo -e "${GREEN}Welcome, $GAMERTAG!${RESET}"
-        return 0
-    else
-        echo -e "${RED}✗ Authentication failed!${RESET}"
-        echo -e "${YELLOW}Please try again or use one of the demo accounts.${RESET}"
-        return 1
-    fi
-}
-
 # Feature selection menu
 select_features() {
     local features=(
@@ -255,12 +208,6 @@ select_features() {
         "Leaderboards|Multi-criteria sorting algorithms"
         "Performance Testing|Load and stress testing"
         "Integration Testing|End-to-end workflow validation"
-        "🧠 AI Player Intelligence Engine|Advanced ML-based analytics"
-        "🎮 Advanced Forge Workshop|Real map upload/download system"
-        "⚡ Weapon Balance & Meta|Live weapon data analysis"
-        "🚀 High-Performance Load Test|Concurrent API stress testing"
-        "🔒 Security & Auth Demo|Permission boundary testing"
-        "🎯 Complete Game Session|Full player journey simulation"
     )
     
     echo -e "${BOLD}${WHITE}SELECT DEMO FEATURES:${RESET}"
@@ -358,12 +305,8 @@ run_demo() {
     draw_advanced_box 70 "DEMO $demo_number/$total_demos: $demo_name" "$CYAN"
     echo
     
-    # Get the script directory
-    SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-    FULL_SCRIPT_PATH="$SCRIPT_DIR/$demo_script"
-    
-    if [ -f "$FULL_SCRIPT_PATH" ]; then
-        chmod +x "$FULL_SCRIPT_PATH"
+    if [ -f "$demo_script" ]; then
+        chmod +x "$demo_script"
         
         # Create demo-specific log
         local log_file="$LOG_DIR/$(basename $demo_script .sh)-$(date +%Y%m%d_%H%M%S).log"
@@ -373,7 +316,7 @@ run_demo() {
         echo
         
         # Run demo with output capture
-        bash "$FULL_SCRIPT_PATH" 2>&1 | tee "$log_file"
+        ./"$demo_script" 2>&1 | tee "$log_file"
         
         if [ ${PIPESTATUS[0]} -eq 0 ]; then
             print_fancy_status "success" "$demo_name completed successfully"
@@ -381,7 +324,7 @@ run_demo() {
             print_fancy_status "error" "$demo_name encountered errors"
         fi
     else
-        print_fancy_status "error" "Demo script not found: $FULL_SCRIPT_PATH"
+        print_fancy_status "error" "Demo script not found: $demo_script"
     fi
     
     echo
@@ -402,24 +345,12 @@ main() {
     exec > >(tee -a "$MAIN_LOG")
     exec 2>&1
     
-    # AUTHENTICATE USER FIRST
-    while ! authenticate_user; do
-        echo
-        echo -e "${YELLOW}Would you like to try again? [Y/n]:${RESET} "
-        read -r retry
-        retry=${retry:-Y}
-        if [[ ! "$retry" =~ ^[Yy]$ ]]; then
-            echo -e "${RED}Demo cancelled. Goodbye!${RESET}"
-            exit 1
-        fi
-    done
-    
     # Feature selection
     echo
     draw_advanced_box 70 "DEMO CONFIGURATION" "$MAGENTA"
     echo
     
-    # Get features
+    # Get features (simplified for this example)
     echo -e "${YELLOW}This suite will demonstrate:${RESET}\n"
     
     demos=(
@@ -479,7 +410,6 @@ main() {
     echo
     
     # Summary stats
-    echo -e "  ${CYAN}◆${RESET} User: ${GREEN}$DEMO_GAMERTAG${RESET}"
     echo -e "  ${CYAN}◆${RESET} Total Demos Run: ${GREEN}$total${RESET}"
     echo -e "  ${CYAN}◆${RESET} Execution Time: ${YELLOW}${DURATION}s${RESET}"
     echo -e "  ${CYAN}◆${RESET} Log Directory: ${BLUE}$LOG_DIR/${RESET}"
@@ -505,7 +435,7 @@ main() {
     done
     
     echo
-    echo -e "${BOLD}${CYAN}Thank you for exploring the Halo Game Platform, $DEMO_GAMERTAG!${RESET}"
+    echo -e "${BOLD}${CYAN}Thank you for exploring the Halo Game Platform!${RESET}"
     echo
     echo -e "${DIM}${WHITE}View complete logs: ${YELLOW}tail -f $MAIN_LOG${RESET}"
     echo

@@ -22,52 +22,51 @@ echo ""
 
 # Test 1: Admin Authentication
 echo -e "${YELLOW}1. Testing Admin Role Authentication${NC}"
-echo "Request: POST /login with admin credentials"
-ADMIN_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST "$BASE_URL/login" \
-    -H "Content-Type: application/json" \
-    -d '{"username":"admin","password":"admin"}')
+echo "Request: GET /halo/player/985752863/stats with admin credentials"
+ADMIN_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u "admin:password" \
+    "$BASE_URL/halo/player/985752863/stats")
 
 HTTP_CODE=$(echo "$ADMIN_RESPONSE" | grep "HTTP_CODE" | cut -d: -f2)
 RESPONSE_BODY=$(echo "$ADMIN_RESPONSE" | sed '/HTTP_CODE/d')
 
 if [ "$HTTP_CODE" = "200" ]; then
-    echo -e "${GREEN}✅ Admin login successful${NC}"
-    echo "Response: $RESPONSE_BODY"
+    echo -e "${GREEN}✅ Admin authentication successful${NC}"
+    echo "Response: $RESPONSE_BODY" | jq . 2>/dev/null || echo "$RESPONSE_BODY"
 else
-    echo -e "${RED}❌ Admin login failed (HTTP $HTTP_CODE)${NC}"
+    echo -e "${RED}❌ Admin authentication failed (HTTP $HTTP_CODE)${NC}"
 fi
 echo "Admin Login Test: $HTTP_CODE" >> $LOG_FILE
 echo ""
 
 # Test 2: Player Authentication
 echo -e "${YELLOW}2. Testing Player Role Authentication${NC}"
-PLAYER_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST "$BASE_URL/login" \
-    -H "Content-Type: application/json" \
-    -d '{"username":"player","password":"player"}')
+echo "Request: GET /halo/player/985752863/stats with player credentials"
+PLAYER_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u "player:password" \
+    "$BASE_URL/halo/player/985752863/stats")
 
 HTTP_CODE=$(echo "$PLAYER_RESPONSE" | grep "HTTP_CODE" | cut -d: -f2)
 RESPONSE_BODY=$(echo "$PLAYER_RESPONSE" | sed '/HTTP_CODE/d')
 
 if [ "$HTTP_CODE" = "200" ]; then
-    echo -e "${GREEN}✅ Player login successful${NC}"
-    echo "Response: $RESPONSE_BODY"
+    echo -e "${GREEN}✅ Player authentication successful${NC}"
+    echo "Response: $RESPONSE_BODY" | jq . 2>/dev/null || echo "$RESPONSE_BODY"
 else
-    echo -e "${RED}❌ Player login failed (HTTP $HTTP_CODE)${NC}"
+    echo -e "${RED}❌ Player authentication failed (HTTP $HTTP_CODE)${NC}"
 fi
 echo "Player Login Test: $HTTP_CODE" >> $LOG_FILE
 echo ""
 
 # Test 3: Invalid Credentials
 echo -e "${YELLOW}3. Testing Invalid Credentials (Security Algorithm)${NC}"
-INVALID_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST "$BASE_URL/login" \
-    -H "Content-Type: application/json" \
-    -d '{"username":"hacker","password":"wrongpass"}')
+echo "Request: GET /halo/player/985752863/stats with invalid credentials"
+INVALID_RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u "hacker:wrongpass" \
+    "$BASE_URL/halo/player/985752863/stats")
 
 HTTP_CODE=$(echo "$INVALID_RESPONSE" | grep "HTTP_CODE" | cut -d: -f2)
 if [ "$HTTP_CODE" = "401" ]; then
     echo -e "${GREEN}✅ Invalid credentials properly rejected${NC}"
 else
-    echo -e "${RED}❌ Security vulnerability detected!${NC}"
+    echo -e "${RED}❌ Security vulnerability detected! (HTTP $HTTP_CODE)${NC}"
 fi
 echo "Invalid Login Test: $HTTP_CODE" >> $LOG_FILE
 echo ""
@@ -75,7 +74,7 @@ echo ""
 # Test 4: Role-Based Endpoint Access
 echo -e "${YELLOW}4. Testing Role-Based Endpoint Access${NC}"
 echo "Testing admin-only endpoint with admin credentials..."
-ADMIN_ENDPOINT=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:admin "$BASE_URL/gameusers")
+ADMIN_ENDPOINT=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u admin:password "$BASE_URL/gameusers")
 HTTP_CODE=$(echo "$ADMIN_ENDPOINT" | grep "HTTP_CODE" | cut -d: -f2)
 
 if [ "$HTTP_CODE" = "200" ]; then
@@ -90,14 +89,17 @@ echo ""
 
 # Test 5: Cross-Role Access Denial
 echo -e "${YELLOW}5. Testing Cross-Role Access Denial${NC}"
-echo "Testing admin endpoint with player credentials..."
-PLAYER_ADMIN_ACCESS=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u player:player "$BASE_URL/gameusers")
+echo "Testing admin-only POST endpoint with player credentials..."
+PLAYER_ADMIN_ACCESS=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u player:password \
+    -X POST "$BASE_URL/gameusers" \
+    -H "Content-Type: application/json" \
+    -d '{"id":999,"firstName":"Test","lastName":"User"}')
 HTTP_CODE=$(echo "$PLAYER_ADMIN_ACCESS" | grep "HTTP_CODE" | cut -d: -f2)
 
 if [ "$HTTP_CODE" = "403" ] || [ "$HTTP_CODE" = "401" ]; then
     echo -e "${GREEN}✅ Player correctly denied admin access${NC}"
 else
-    echo -e "${RED}❌ Authorization bypass detected!${NC}"
+    echo -e "${RED}❌ Authorization bypass detected! (HTTP $HTTP_CODE)${NC}"
 fi
 echo "Cross-Role Access Test: $HTTP_CODE" >> $LOG_FILE
 echo ""
@@ -108,10 +110,9 @@ echo "Testing multiple concurrent sessions..."
 
 # Create multiple sessions
 for i in {1..3}; do
-    CONCURRENT_LOGIN=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST "$BASE_URL/login" \
-        -H "Content-Type: application/json" \
-        -d "{\"username\":\"user$i\",\"password\":\"user$i\"}")
-    HTTP_CODE=$(echo "$CONCURRENT_LOGIN" | grep "HTTP_CODE" | cut -d: -f2)
+    CONCURRENT_TEST=$(curl -s -w "\nHTTP_CODE:%{http_code}" -u "user:password" \
+        "$BASE_URL/halo/player/985752863/stats")
+    HTTP_CODE=$(echo "$CONCURRENT_TEST" | grep "HTTP_CODE" | cut -d: -f2)
     echo "Session $i: HTTP $HTTP_CODE"
 done
 echo -e "${GREEN}✅ Concurrent session handling complete${NC}"
@@ -125,14 +126,13 @@ TOTAL_TIME=0
 SUCCESS_COUNT=0
 
 for i in {1..10}; do
-    START_TIME=$(date +%s%N)
-    AUTH_TEST=$(curl -s -w "\nHTTP_CODE:%{http_code}" -X POST "$BASE_URL/login" \
-        -H "Content-Type: application/json" \
-        -d '{"username":"admin","password":"admin"}')
-    END_TIME=$(date +%s%N)
+    START_TIME=$(date +%s)
+    AUTH_TEST=$(curl -s -w "\nHTTP_CODE:%{http_code}\nTIME_TOTAL:%{time_total}" -u "admin:password" \
+        "$BASE_URL/halo/player/985752863/stats")
     
     HTTP_CODE=$(echo "$AUTH_TEST" | grep "HTTP_CODE" | cut -d: -f2)
-    DURATION=$(( (END_TIME - START_TIME) / 1000000 )) # Convert to milliseconds
+    TIME_TOTAL=$(echo "$AUTH_TEST" | grep "TIME_TOTAL" | cut -d: -f2)
+    DURATION=$(echo "$TIME_TOTAL * 1000" | bc | cut -d. -f1)
     
     if [ "$HTTP_CODE" = "200" ]; then
         SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
