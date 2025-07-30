@@ -1,25 +1,25 @@
-# 🎮 Halo Game Platform - Backend Demo Suite
+#  Halo Game Platform - Backend Demo Suite
 
 Ultra-advanced interactive demonstration of all backend algorithms and features with stunning terminal UI.
 
-## 🚀 One-Liner Quick Start
+##  One-Liner Quick Start
 
 ```bash
 bash demos/demo.sh && tail -n 50 logs/demo_summary.log
 ```
 
-## 📋 Demo Features
+## Demo Features
 
-### 🎨 Advanced Terminal UI
+## Advanced Terminal UI
 - **Full Color Support**: 16+ colors with gradients
 - **Unicode Graphics**: Progress bars, boxes, and icons
 - **Animated Elements**: Spinners, loading bars, and transitions
 - **Interactive Prompts**: Yes/No selections and feature choices
 - **Real-time Updates**: Live data visualization
 
-### 📊 Demonstrations Included
+### Demonstrations Included
 
-1. **🔐 Authentication & Authorization**
+1. ** Authentication & Authorization**
    - Role-based access control (Admin, Player, User, Guest)
    - Session management algorithms
    - Security validation
@@ -31,37 +31,37 @@ bash demos/demo.sh && tail -n 50 logs/demo_summary.log
    - Ranking algorithms
    - Performance metrics
 
-3. **🎯 Matchmaking System**
+3. ** Matchmaking System**
    - Skill-based matching (ELO)
    - Queue management
    - Team balancing
    - Party support
 
-4. **🗺️ Forge Maps & Ratings**
+4. ** Forge Maps & Ratings**
    - Map upload/validation
    - Rating algorithms
    - Recommendation engine
    - Search functionality
 
-5. **🏆 Leaderboard Systems**
+5. ** Leaderboard Systems**
    - Multi-criteria sorting
    - Real-time updates
    - Percentile rankings
    - Time-based boards
-
-6. **⚡ Performance Testing**
+     
+6. * Performance Testing**
    - Load testing (up to 100 users)
    - Stress testing
    - Optimization metrics
    - Cache performance
 
-7. **🔗 Integration Testing**
+7. ** Integration Testing**
    - End-to-end workflows
    - Cross-system validation
    - Error handling
    - Performance analysis
 
-## 🛠️ Running Individual Demos
+##  Running Individual Demos
 
 ```bash
 # Run specific demo
@@ -77,7 +77,7 @@ bash demos/integration/demo-integration.sh
 bash demos/run-all-demos.sh
 ```
 
-## 📁 Directory Structure
+##  Directory Structure
 
 ```
 demos/
@@ -94,7 +94,7 @@ demos/
 └── logs/                  # Demo execution logs
 ```
 
-## 📊 Algorithms Demonstrated
+## Algorithms Demonstrated
 
 ### Big O Complexity Analysis
 - **Authentication**: O(1) - Hash lookup
@@ -111,7 +111,7 @@ demos/
 - **Factory**: Match creation
 - **Cache-aside**: Performance optimization
 
-## 🎯 Performance Metrics
+## Performance Metrics
 
 Expected performance benchmarks:
 - **Response Time**: < 50ms average
@@ -120,7 +120,7 @@ Expected performance benchmarks:
 - **Error Rate**: < 0.1%
 - **Uptime**: 99.9%
 
-## 🔧 Prerequisites
+## Prerequisites
 
 1. **Backend Server**: Java REST API must be running
    ```bash
@@ -134,7 +134,7 @@ Expected performance benchmarks:
    - jq (optional, for JSON parsing)
    - bc (for calculations)
 
-## 📝 Logging
+## Logging
 
 All demos create detailed logs in the `logs/` directory:
 - Individual demo logs: `logs/demo-name-TIMESTAMP.log`
@@ -145,7 +145,7 @@ View logs in real-time:
 tail -f logs/demo_summary_*.log
 ```
 
-## 🎨 Terminal Requirements
+## Terminal Requirements
 
 For best experience:
 - Terminal with 256 color support
@@ -153,7 +153,7 @@ For best experience:
 - Minimum 80x24 terminal size
 - Recommended: 120x40 or larger
 
-## 🚨 Troubleshooting
+## Troubleshooting
 
 **Server not running?**
 ```bash
@@ -171,7 +171,7 @@ chmod +x demos/*.sh demos/*/*.sh
 export TERM=xterm-256color
 ```
 
-## 🎮 Demo Experience
+## Demo Experience
 
 The demos provide an immersive experience showcasing:
 - Real backend functionality
@@ -186,7 +186,7 @@ Each demo is designed to be:
 - **Interactive**: Make choices
 - **Comprehensive**: Cover all features
 
-## 🏁 Quick Demo Commands
+## Quick Demo Commands
 
 ```bash
 # One-liner for everything
@@ -202,7 +202,7 @@ bash demos/run-stats-demo.sh
 bash demos/performance/demo-performance.sh
 ```
 
-## 📚 Additional Resources
+## Additional Resources
 
 - Backend API Documentation: See `java-rest-api/README.md`
 - Unity Integration: See `unity-halo-client/README.md`
@@ -210,4 +210,4 @@ bash demos/performance/demo-performance.sh
 
 ---
 
-**Enjoy the show!** 🎭 Each demo is crafted to demonstrate the power and sophistication of the Halo Game Platform backend.
+**Enjoy the show!** Each demo is crafted to demonstrate the power and sophistication of the Halo Game Platform backend.
