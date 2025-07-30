@@ -9,7 +9,7 @@
 
 A **FULLY FUNCTIONAL** multiplayer gaming backend inspired by Halo, featuring real authentication, player statistics, matchmaking algorithms, and comprehensive API endpoints. This is a **REAL WORKING BACKEND**, not a theoretical demo!
 
-##  IMPORTANT: This Backend is REAL and WORKING!
+##  Backend Shwoiwng off Java and Python for automation 
 
 -  **Real API endpoints** responding with actual data
 -  **Real authentication** with 4 user types
