@@ -7,17 +7,17 @@
 [![API](https://img.shields.io/badge/REST%20API-Working-green)](http://localhost:8080)
 [![Demo](https://img.shields.io/badge/Interactive%20Demos-13%20Modules-purple)](./demos)
 
-A **FULLY FUNCTIONAL** multiplayer gaming backend inspired by Halo, featuring real authentication, player statistics, matchmaking algorithms, and comprehensive API endpoints. This is a **REAL WORKING BACKEND**, not a theoretical demo!
+A FULLY FUNCTIONAL multiplayer gaming backend inspired by Halo, featuring real authentication, player statistics, matchmaking algorithms, and comprehensive API endpoints. This is a REAL WORKING BACKEND, not a theoretical demo!
 
-##  Backend Showing off Java and Python for automation 
+## IMPORTANT: This Backend is REAL and WORKING!
 
--  **Real API endpoints** responding with actual data
--  **Real authentication** with 4 user types
--  **Real database operations** (in-memory for demo)
--  **Real algorithms** for matchmaking and stats
--  **Real security** with role-based access
+-  Real API endpoints responding with actual data
+-  Real authentication with 4 user types
+-  Real database operations (in-memory for demo)
+-  Real algorithms for matchmaking and stats
+-  Real security with role-based access
 
-##  Quick Start Guide
+## Quick Start Guide
 
 ### Prerequisites
 - Java 11 or higher
@@ -47,7 +47,7 @@ The server will start on `http://localhost:8080`
 
 ### Step 2: Run the Demo Suite
 
-**In a new terminal:**
+In a new terminal:
 
 ```bash
 # Navigate to project root
@@ -57,7 +57,7 @@ cd halo-game-platform
 bash demos/run-all-demos.sh
 ```
 
-**Login credentials (ALL use 'password' as the password):**
+Login credentials (ALL use 'password' as the password):
 - Username: `admin` / Password: `password`
 - Username: `player` / Password: `password`
 - Username: `user` / Password: `password`
@@ -92,94 +92,94 @@ curl -u player:password http://localhost:8080/halo/weapons
 curl "http://localhost:8080/halo/leaderboard/kills?limit=5"
 ```
 
-##  Complete Documentation
+## Complete Documentation
 
-- [ Current Backend Status](#-current-backend-status)
-- [ How to Run Everything](#-how-to-run-everything)
-- [ API Endpoints](#-api-endpoints)
-- [ Project Structure](#-project-structure)
-- [ Frontend Development Plan](#-frontend-development-plan)
-- [ Troubleshooting](#-troubleshooting)
-- [ What's Next](#-whats-next)
+- [Current Backend Status](#current-backend-status)
+- [How to Run Everything](#how-to-run-everything)
+- [API Endpoints](#api-endpoints)
+- [Project Structure](#complete-file-tree--documentation)
+- [Frontend Development Plan](#frontend-development-plan)
+- [Troubleshooting](#troubleshooting)
+- [What's Next](#whats-next)
 
-##  Current Backend Status
+## Current Backend Status
 
-###  What's FULLY WORKING Right Now
+### What's FULLY WORKING Right Now
 
-1. **Authentication System**
+1. Authentication System
    - Basic Auth with 4 user types (admin, player, user, guest)
    - Role-based permissions
    - Secure password handling
    - Session management
 
-2. **Player Statistics API**
+2. Player Statistics API
    - Real-time K/D ratio calculations
    - Win/loss tracking
    - Medal system
    - Rank progression
    - Complete player profiles
 
-3. **Weapons Database**
+3. Weapons Database
    - Weapon stats (damage, fire rate, etc.)
    - Balance data
    - Public access endpoint
 
-4. **Leaderboard System**
+4. Leaderboard System
    - Rankings by kills, wins, K/D ratio
    - Pagination support
    - Real-time updates
 
-5. **Map Management**
+5. Map Management
    - Upload custom maps
    - Download maps
    - Rating system
    - Browse functionality
 
-6. **Matchmaking Queue**
+6. Matchmaking Queue
    - Join/leave queue
    - Skill-based matching
    - Queue status tracking
    - Team balancing
 
-###  Ready to Add (Infrastructure Exists)
+### Ready to Add (Infrastructure Exists)
 
-1. **Player Registration**
+1. Player Registration
    - BCrypt already in dependencies
    - JWT support ready
    - Just need endpoint
 
-2. **Email System**
+2. Email System
    - Architecture supports it
    - Validation ready
 
-3. **Real-time Updates**
+3. Real-time Updates
    - WebSocket support possible
    - Event system ready
 
-##  How to Run Everything
+## How to Run Everything
 
 ### Complete Setup Instructions
 
-1. **Start Backend Server**
+1. Start Backend Server
    ```bash
    cd java-rest-api
    mvn clean package  # Build (first time)
    java -jar target/gameauth-0.0.1-SNAPSHOT.jar server config.yml
    ```
    
-2. **Verify Server is Running**
+2. Verify Server is Running
    ```bash
    # Should return player stats JSON
    curl -u admin:password http://localhost:8080/halo/player/985752863/stats
    ```
 
-3. **Run Demo Suite**
+3. Run Demo Suite
    ```bash
    cd ../demos
    ./run-all-demos.sh
    ```
    
-4. **Run Individual Demos**
+4. Run Individual Demos
    ```bash
    # Authentication demo
    ./auth/demo-auth.sh
@@ -194,24 +194,24 @@ curl "http://localhost:8080/halo/leaderboard/kills?limit=5"
 
 ### What You'll See When Running Demos
 
--  **Beautiful Terminal UI**: ASCII art, colors, and animations
--  **Login System**: Authenticate with real backend before demos start
--  **Real API Calls**: Every demo makes actual HTTP requests to the backend
--  **Performance Metrics**: Response times, success rates, and benchmarks
--  **13 Demo Modules**: Each showcasing different backend features
--  **Comprehensive Logs**: All requests/responses saved to `demos/logs/`
+-  Beautiful Terminal UI: ASCII art, colors, and animations
+-  Login System: Authenticate with real backend before demos start
+-  Real API Calls: Every demo makes actual HTTP requests to the backend
+-  Performance Metrics: Response times, success rates, and benchmarks
+-  13 Demo Modules: Each showcasing different backend features
+-  Comprehensive Logs: All requests/responses saved to `demos/logs/`
 
 ### Demo Features Showcase
 
-1. **Authentication Demo**: Tests role-based access, security, and permissions
-2. **Stats Demo**: Shows K/D calculations, medal tracking, and rankings
-3. **Matchmaking Demo**: Demonstrates queue management and skill-based matching
-4. **Maps Demo**: Upload, browse, rate, and download custom maps
-5. **Leaderboard Demo**: Multi-criteria sorting and real-time updates
-6. **Performance Demo**: Load testing with concurrent requests
-7. **Advanced Demos**: AI analytics, weapon balancing, and more
+1. Authentication Demo: Tests role-based access, security, and permissions
+2. Stats Demo: Shows K/D calculations, medal tracking, and rankings
+3. Matchmaking Demo: Demonstrates queue management and skill-based matching
+4. Maps Demo: Upload, browse, rate, and download custom maps
+5. Leaderboard Demo: Multi-criteria sorting and real-time updates
+6. Performance Demo: Load testing with concurrent requests
+7. Advanced Demos: AI analytics, weapon balancing, and more
 
-##  API Endpoints
+## API Endpoints
 
 ### Complete API Reference
 
@@ -292,7 +292,7 @@ curl -u admin:password -X POST http://localhost:8080/halo/matchmaking/queue \
   -d '{"playerId": 985752863, "playlist": "TEAM_SLAYER"}'
 ```
 
-##  Complete File Tree & Documentation
+## Complete File Tree & Documentation
 
 ### Project Structure
 ```
@@ -376,26 +376,26 @@ halo-game-platform/
 
 #### Backend Core Files
 
-**GameAuthApplication.java**
+GameAuthApplication.java
 - Main entry point
 - Registers all resources
 - Configures authentication
 - Sets up health checks
 
-**HaloResource.java**
+HaloResource.java
 - All Halo API endpoints
 - Player stats CRUD
 - Matchmaking logic
 - Map management
 - Leaderboard queries
 
-**HaloGameService.java**
+HaloGameService.java
 - Business logic layer
 - Stats calculations
 - Matchmaking algorithms
 - Game state management
 
-**HaloStatsDAO.java**
+HaloStatsDAO.java
 - Thread-safe data storage
 - Concurrent operations
 - In-memory database
@@ -403,20 +403,20 @@ halo-game-platform/
 
 #### Demo Scripts
 
-**run-all-demos.sh**
+run-all-demos.sh
 - Interactive login system
 - Runs all demos in sequence
 - Beautiful terminal UI
 - Progress tracking
 - Performance metrics
 
-**demo-intelligence-engine.sh**
+demo-intelligence-engine.sh
 - Real-time analytics
 - Player behavior analysis
 - Performance predictions
 - Statistical modeling
 
-**demo-weapon-meta.sh**
+demo-weapon-meta.sh
 - Weapon balance analysis
 - DPS calculations
 - Usage statistics
@@ -424,22 +424,22 @@ halo-game-platform/
 
 ### How Components Interact
 
-1. **Client → API Layer**
+1. Client → API Layer
    - HTTP requests with Basic Auth
    - JSON request/response
    - Role-based access control
 
-2. **API → Service Layer**
+2. API → Service Layer
    - Business logic processing
    - Validation and calculations
    - Algorithm execution
 
-3. **Service → DAO Layer**
+3. Service → DAO Layer
    - Data persistence
    - Thread-safe operations
    - Caching mechanisms
 
-4. **Demo Scripts → Backend**
+4. Demo Scripts → Backend
    - Real API calls
    - Authentication flow
    - Data manipulation
@@ -509,36 +509,36 @@ sequenceDiagram
     API-->>Client: HTTP 200 + stats
 ```
 
-##  Demo Showcase
+## Demo Showcase
 
 ### Interactive Terminal Demos
 
-Our **advanced demo suite** showcases every backend feature through beautifully animated terminal interfaces:
+Our advanced demo suite showcases every backend feature through beautifully animated terminal interfaces:
 
-####  **Run All Demos (Recommended)**
+#### Run All Demos (Recommended)
 ```bash
 cd demos
 ./run-all-demos.sh
 ```
 
-**Features:**
--  **Advanced Terminal UI**: Colors, animations, progress bars
--  **Real-time Metrics**: Response times, success rates
--  **Comprehensive Logging**: All requests and responses captured
--  **Interactive Flow**: Step-through each demonstration
--  **Gaming Aesthetics**: Halo-inspired visual design
+Features:
+-  Advanced Terminal UI: Colors, animations, progress bars
+-  Real-time Metrics: Response times, success rates
+-  Comprehensive Logging: All requests and responses captured
+-  Interactive Flow: Step-through each demonstration
+-  Gaming Aesthetics: Halo-inspired visual design
 
-####  **Individual Demo Modules**
+#### Individual Demo Modules
 
 | Demo Module | Command | What It Shows |
 |-------------|---------|---------------|
-| ** Authentication** | `./auth/demo-auth.sh` | Role-based access, token management, security |
-| ** Player Stats** | `./stats/demo-stats.sh` | Statistics algorithms, K/D calculations, rankings |
-| ** Matchmaking** | `./matchmaking/demo-matchmaking.sh` | Queue management, ELO system, team balancing |
-| ** Custom Maps** | `./maps/demo-maps.sh` | Content upload, rating system, filtering |
-| ** Leaderboards** | `./leaderboard/demo-leaderboard.sh` | Multi-criteria sorting, pagination, rankings |
-| ** Performance** | `./performance/demo-performance.sh` | Load testing, benchmarks, optimization |
-| ** Integration** | `./integration/demo-integration.sh` | End-to-end workflows, data consistency |
+| Authentication | `./auth/demo-auth.sh` | Role-based access, token management, security |
+| Player Stats | `./stats/demo-stats.sh` | Statistics algorithms, K/D calculations, rankings |
+| Matchmaking | `./matchmaking/demo-matchmaking.sh` | Queue management, ELO system, team balancing |
+| Custom Maps | `./maps/demo-maps.sh` | Content upload, rating system, filtering |
+| Leaderboards | `./leaderboard/demo-leaderboard.sh` | Multi-criteria sorting, pagination, rankings |
+| Performance | `./performance/demo-performance.sh` | Load testing, benchmarks, optimization |
+| Integration | `./integration/demo-integration.sh` | End-to-end workflows, data consistency |
 
 ### Sample Demo Output
 ```
@@ -565,17 +565,17 @@ Progress: [███████████████████████
  AUTHENTICATION COMPLETE - All security tests passed!
 ```
 
-##  API Reference
+## API Reference
 
 ### Core Endpoints Overview
 
 | Category | Endpoints | Features |
 |----------|-----------|----------|
-| ** Authentication** | 3 endpoints | Login, logout, user management |
-| ** Player Statistics** | 4 endpoints | Stats CRUD, leaderboards, rankings |
-| ** Matchmaking** | 3 endpoints | Queue management, skill matching |
-| ** Content Management** | 4 endpoints | Map upload, browsing, ratings |
-| ** System** | 1 endpoint | Health checks, diagnostics |
+| Authentication | 3 endpoints | Login, logout, user management |
+| Player Statistics | 4 endpoints | Stats CRUD, leaderboards, rankings |
+| Matchmaking | 3 endpoints | Queue management, skill matching |
+| Content Management | 4 endpoints | Map upload, browsing, ratings |
+| System | 1 endpoint | Health checks, diagnostics |
 
 ### Key API Examples
 
@@ -651,38 +651,38 @@ curl -X POST http://localhost:8080/halo/matchmaking/queue \
 
 ### Complete API Documentation
 
-For **full interactive API documentation** with try-it-out functionality:
+For full interactive API documentation with try-it-out functionality:
 
-1. **Start the backend**: `./run-server.sh`
-2. **Open Swagger UI**: `http://localhost:8080/swagger`
-3. **Test endpoints**: All endpoints available with authentication
+1. Start the backend: `./run-server.sh`
+2. Open Swagger UI: `http://localhost:8080/swagger`
+3. Test endpoints: All endpoints available with authentication
 
-##  Performance Metrics
+## Performance Metrics
 
 ### Benchmark Results
 
-Our **performance demo** (`./performance/demo-performance.sh`) provides comprehensive metrics:
+Our performance demo (`./performance/demo-performance.sh`) provides comprehensive metrics:
 
 | Operation | Avg Response Time | Throughput | Concurrency |
 |-----------|------------------|------------|-------------|
-| **Authentication** | 15ms | 2,000 req/sec | 100 users |
-| **Player Stats Retrieval** | 8ms | 5,000 req/sec | 200 users |
-| **Leaderboard Query** | 25ms | 1,500 req/sec | 50 users |
-| **Matchmaking Queue** | 12ms | 3,000 req/sec | 150 users |
-| **Map Upload** | 150ms | 200 req/sec | 20 users |
+| Authentication | 15ms | 2,000 req/sec | 100 users |
+| Player Stats Retrieval | 8ms | 5,000 req/sec | 200 users |
+| Leaderboard Query | 25ms | 1,500 req/sec | 50 users |
+| Matchmaking Queue | 12ms | 3,000 req/sec | 150 users |
+| Map Upload | 150ms | 200 req/sec | 20 users |
 
 ### Memory Usage
-- **Startup Memory**: 64MB
-- **Runtime Memory**: 128MB (with 10K active users)
-- **Memory Growth**: Linear O(n) with user count
-- **GC Optimization**: Sub-10ms pause times
+- Startup Memory: 64MB
+- Runtime Memory: 128MB (with 10K active users)
+- Memory Growth: Linear O(n) with user count
+- GC Optimization: Sub-10ms pause times
 
 ### Caching Performance
-- **Statistics Cache**: 99.2% hit rate
-- **Leaderboard Cache**: 95.8% hit rate  
-- **Response Time Improvement**: 85% faster with caching
+- Statistics Cache: 99.2% hit rate
+- Leaderboard Cache: 95.8% hit rate  
+- Response Time Improvement: 85% faster with caching
 
-##  Testing & Quality
+## Testing & Quality
 
 ### Test Coverage: 85%+
 ```bash
@@ -698,21 +698,21 @@ mvn test -Dtest=IntegrationTest
 ```
 
 ### Quality Metrics
-- **Unit Tests**: 120+ test cases
-- **Integration Tests**: 25+ end-to-end scenarios
-- **Mock Coverage**: All external dependencies mocked
-- **Code Quality**: SonarQube Grade A
-- **Documentation**: 100% API documentation coverage
+- Unit Tests: 120+ test cases
+- Integration Tests: 25+ end-to-end scenarios
+- Mock Coverage: All external dependencies mocked
+- Code Quality: SonarQube Grade A
+- Documentation: 100% API documentation coverage
 
 ### Test Categories
 | Test Type | Count | Coverage |
 |-----------|-------|----------|
-| **Unit Tests** | 89 | Core business logic |
-| **Integration Tests** | 25 | End-to-end workflows |
-| **Performance Tests** | 12 | Load and stress testing |
-| **Security Tests** | 15 | Authentication and authorization |
+| Unit Tests | 89 | Core business logic |
+| Integration Tests | 25 | End-to-end workflows |
+| Performance Tests | 12 | Load and stress testing |
+| Security Tests | 15 | Authentication and authorization |
 
-##  Deployment Guide
+## Deployment Guide
 
 ### Local Development
 ```bash
@@ -749,12 +749,12 @@ export HALO_CACHE_SIZE=10000
 ```
 
 ### Health Monitoring
-- **Health Check**: `GET /health`
-- **Metrics**: `GET /metrics`
-- **Thread Dump**: `GET /threads`
-- **JVM Stats**: `GET /jvm`
+- Health Check: `GET /health`
+- Metrics: `GET /metrics`
+- Thread Dump: `GET /threads`
+- JVM Stats: `GET /jvm`
 
-##  Frontend Development Plan
+## Frontend Development Plan
 
 ### What We Need to Build: JavaScript Halo Game
 
@@ -795,58 +795,58 @@ halo-frontend/
 
 #### Core Features to Implement
 
-1. **Login System**
+1. Login System
    - Connect to backend auth
    - Store JWT token
    - Role-based UI
 
-2. **Game Lobby**
+2. Game Lobby
    - Player list
    - Map selection
    - Game mode choice
 
-3. **2D Arena Shooter**
+3. 2D Arena Shooter
    - Top-down view
    - WASD movement
    - Mouse aim/shoot
    - Weapon pickups
 
-4. **Real-time Multiplayer**
+4. Real-time Multiplayer
    - WebSocket connection
    - Player synchronization
    - Lag compensation
 
-5. **Stats Integration**
+5. Stats Integration
    - Kill tracking
    - Update backend
    - Show medals
 
-6. **Leaderboard**
+6. Leaderboard
    - Live updates
    - Filter options
    - Player profiles
 
 ### Implementation Timeline (3 Hours)
 
-**Hour 1: Setup & Auth**
+Hour 1: Setup & Auth
 - Project setup with Vite
 - Login screen
 - API integration
 - Basic routing
 
-**Hour 2: Game Core**
+Hour 2: Game Core
 - Phaser.js setup
 - Player movement
 - Shooting mechanics
 - Basic map
 
-**Hour 3: Multiplayer & Polish**
+Hour 3: Multiplayer & Polish
 - WebSocket setup
 - Player sync
 - Stats tracking
 - UI polish
 
-##  Troubleshooting
+## Troubleshooting
 
 ### Common Issues and Fixes
 
@@ -891,11 +891,11 @@ tail -f logs/server.log
 bash demos/auth/demo-auth.sh
 ```
 
-##  What's Next
+## What's Next
 
 ### Immediate Tasks
 
-1. **Add Player Registration Endpoint**
+1. Add Player Registration Endpoint
    ```java
    @POST
    @Path("/register")
@@ -908,48 +908,48 @@ bash demos/auth/demo-auth.sh
    }
    ```
 
-2. **Build JavaScript Frontend**
+2. Build JavaScript Frontend
    - 2D multiplayer arena
    - Connect to backend
    - Real-time gameplay
 
-3. **Add WebSocket Support**
+3. Add WebSocket Support
    - Live game updates
    - Chat system
    - Notifications
 
 ### Backend Improvements
 
-1. **Database Integration**
+1. Database Integration
    - PostgreSQL setup
    - Data persistence
    - Migration scripts
 
-2. **Enhanced Security**
+2. Enhanced Security
    - JWT tokens
    - Rate limiting
    - Input validation
 
-3. **Performance Optimization**
+3. Performance Optimization
    - Redis caching
    - Query optimization
    - Load balancing
 
-##  Support & Contributing
+## Support & Contributing
 
 ### Quick Help
-- **Issues**: Report bugs via GitHub Issues
-- **Documentation**: Full docs in `./docs/`
-- **API Reference**: `http://localhost:8080/swagger`
-- **Demo Logs**: `./demos/logs/`
+- Issues: Report bugs via GitHub Issues
+- Documentation: Full docs in `./docs/`
+- API Reference: `http://localhost:8080/swagger`
+- Demo Logs: `./demos/logs/`
 
 ### Architecture Docs
-- **System Design**: `./java-rest-api/ARCHITECTURE.md`
-- **API Specification**: `./java-rest-api/API_DOCS.md`
-- **Testing Guide**: `./java-rest-api/TESTING_DOCUMENTATION.md`
-- **Deployment Guide**: `./java-rest-api/DEPLOYMENT_GUIDE.md`
+- System Design: `./java-rest-api/ARCHITECTURE.md`
+- API Specification: `./java-rest-api/API_DOCS.md`
+- Testing Guide: `./java-rest-api/TESTING_DOCUMENTATION.md`
+- Deployment Guide: `./java-rest-api/DEPLOYMENT_GUIDE.md`
 
-##  Support & Contact
+## Support & Contact
 
 ### Getting Help
 - Check server logs: `tail -f java-rest-api/logs/server.log`
@@ -963,39 +963,39 @@ bash demos/auth/demo-auth.sh
 
 ---
 
-##  Summary: Where We Are & What's Next
+## Summary: Where We Are & What's Next
 
-###  Backend Status: FULLY FUNCTIONAL
-- **Working REST API** with 15+ endpoints
-- **Real authentication** with 4 user types
-- **Live data operations** (stats, leaderboards, maps)
-- **Matchmaking algorithms** implemented
-- **Performance tested** and optimized
-- **Security features** with role-based access
+### Backend Status: FULLY FUNCTIONAL
+- Working REST API with 15+ endpoints
+- Real authentication with 4 user types
+- Live data operations (stats, leaderboards, maps)
+- Matchmaking algorithms implemented
+- Performance tested and optimized
+- Security features with role-based access
 
-###  Next Step: Build the Frontend Game
-1. **Set up JavaScript project** (3 hours total)
+### Next Step: Build the Frontend Game
+1. Set up JavaScript project (3 hours total)
    - Use Phaser.js for 2D game
    - Vue/React for UI
    - Socket.io for real-time
 
-2. **Connect to backend**
+2. Connect to backend
    - Login system
    - Stats tracking
    - Leaderboard display
 
-3. **Create multiplayer arena**
+3. Create multiplayer arena
    - Top-down shooter
    - Real-time combat
    - Map integration
 
-###  This is a REAL Backend!
-- **NOT theoretical** - it's running actual code
-- **NOT a demo** - it handles real requests
-- **NOT simulated** - actual data operations
-- **READY for production** - just needs frontend
+### This is a REAL Backend!
+- NOT theoretical - it's running actual code
+- NOT a demo - it handles real requests
+- NOT simulated - actual data operations
+- READY for production - just needs frontend
 
-**Start the server, run the demos, and see for yourself!**
+Start the server, run the demos, and see for yourself!
 
 ---
 
