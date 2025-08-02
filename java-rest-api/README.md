@@ -2,7 +2,7 @@
 
 This project contains TWO different servers:
 
-## 1.HALO Game Platform (Full Game Backend)
+## HALO Game Platform (Full Game Backend)
 
 ```bash
 # Run the full Halo game server with all features
@@ -16,7 +16,7 @@ python3 run_halo_server.py
 - Leaderboards
 - Match history
 
-## 2. GameAuth Framework (Basic Auth Demo)
+## GameAuth Framework (Basic Auth Demo)
 
 ```bash
 # Run the basic authentication framework demo
@@ -44,3 +44,4 @@ mvn clean package
 ## Documentation
 
 Additional documentation is available in the `docs/` directory.
+
