@@ -155,6 +155,7 @@ cd demos
 ```
 
 ### Advanced Demos
+**Still need to fully implement accuractly TODO**
 ```bash
 cd demos/advanced
 
@@ -365,4 +366,5 @@ cd java-rest-api && python3 run_halo_server.py
 
 
 Then visit http://localhost:8080/halo/weapons in your browser.
+
 
