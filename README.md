@@ -1,4 +1,4 @@
-# RESTful Multiplayer Game API (Backend Only)
+# RESTful Multiplayer Game API (Backend)
 ![Java](https://img.shields.io/badge/Java-8+-red)
 ![Dropwizard](https://img.shields.io/badge/Dropwizard-2.0-blue)
 ![License: MIT](https://img.shields.io/badge/License-MIT-green)
@@ -12,7 +12,7 @@
 
 This repository demonstrates my expertise in building scalable, production-ready REST APIs. While themed around a game platform for engagement, it exemplifies real-world backend development practices including authentication, data modeling, API design, and system architecture that apply to any enterprise application.
 
-## Quick Start (2 Minutes to Running)
+## Quick Start 
 
 ```bash
 # 1. Clone and setup
@@ -366,6 +366,7 @@ cd java-rest-api && python3 run_halo_server.py
 
 
 Then visit http://localhost:8080/halo/weapons in your browser.
+
 
 
 
