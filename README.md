@@ -5,7 +5,7 @@
 ![Status](https://img.shields.io/badge/Build-Passing-brightgreen)
 
 
-**A professional demonstration of RESTful API design using Java, Dropwizard, and enterprise-grade architecture patterns. This project showcases backend engineering skills through the development of a fully functional multiplayer game server system with proper role-based access control, session management, and authentication logic.**
+**A professional demonstration of RESTful API design using Java, Dropwizard, and enterprise-grade architecture patterns. This project showcases backend engineering skills through the development of a fully functional multiplayer game server system with proper role-based access control, session management, and authentication logic. Still plan on adding features**
 
 > **Note:** Frontend not included. This is a backend-only REST API demo implemented in Java (Dropwizard), featuring Python auto-launchers for automated testing, endpoint verification, and orchestration.
 ## Purpose
@@ -365,3 +365,4 @@ cd java-rest-api && python3 run_halo_server.py
 
 
 Then visit http://localhost:8080/halo/weapons in your browser.
+
