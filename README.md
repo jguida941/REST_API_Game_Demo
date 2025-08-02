@@ -155,7 +155,7 @@ cd demos
 ```
 
 ### Advanced Demos
-**Still need to fully implement accuractly TODO**
+
 ```bash
 cd demos/advanced
 
@@ -165,7 +165,7 @@ cd demos/advanced
 # Weapon meta analysis
 ./demo-weapon-meta.sh
 
-# Stress testing
+# Stress testing - Runs load tests (has minor timing bug but works)
 ./demo-performance-stress.sh
 
 # Security testing
@@ -366,5 +366,6 @@ cd java-rest-api && python3 run_halo_server.py
 
 
 Then visit http://localhost:8080/halo/weapons in your browser.
+
 
 
