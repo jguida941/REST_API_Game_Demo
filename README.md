@@ -1,4 +1,4 @@
-# RESTful Multiplayer Game API (Backend) 📡
+#  📡 RESTful Multiplayer Game API (Backend)
 
 ![Java](https://img.shields.io/badge/Java-8+-red)
 ![Dropwizard](https://img.shields.io/badge/Dropwizard-2.0-blue)
@@ -6,21 +6,21 @@
 ![Status](https://img.shields.io/badge/Build-Passing-brightgreen)
 
 
-**A professional demonstration of RESTful API design using Java, Dropwizard, and enterprise-grade architecture patterns. This project showcases backend engineering skills through the development of a fully functional multiplayer game server system with proper role-based access control, session management, and authentication logic. Still plan on adding features**
+#### A professional demonstration of RESTful API design using Java, Dropwizard, and enterprise-grade architecture patterns. This project showcases backend engineering skills through the development of a fully functional multiplayer game server system with proper role-based access control, session management, and authentication logic. Still plan on adding features 
 
 > **Note:** Frontend not included. This is a backend-only REST API demo implemented in Java (Dropwizard), featuring Python auto-launchers for automated testing, endpoint verification, and orchestration.
 ## 🎯Purpose
 
 This repository demonstrates my expertise in building scalable, production-ready REST APIs. While themed around a game platform for engagement, it exemplifies real-world backend development practices including authentication, data modeling, API design, and system architecture that apply to any enterprise application.
 
-  ### Core Technology
+  #### Core Technology
 
   - Language: Java 8
   - Framework: Dropwizard 2.0 (enterprise-grade REST framework)
   - Build Tool: Maven
   - API Type: RESTful API with JSON responses
 
-  ### Java REST API
+  #### Java REST API
 
   1. Backend is 100% Java - All the source code in java-rest-api/src/main/java/
   2. REST Endpoints - 25+ RESTful endpoints following HTTP standards:
@@ -29,13 +29,13 @@ This repository demonstrates my expertise in building scalable, production-ready
     - Proper HTTP status codes
   3. Dropwizard Framework - Production-ready Java framework for building REST APIs
 
-  ### Python Scripts Launchers
+  #### Python Scripts Launchers
 
   - run_halo_server.py and run_server.py are only used to start the Java server
   - They execute: java -jar gameauth-0.0.1-SNAPSHOT.jar server config.yml
   - The actual server and all business logic is Java
 
-  ### Java Components
+  #### Java Components
 
   - Controllers - Handle HTTP requests (HaloGameResource.java, GameUserRESTController.java)
   - Services - Business logic (HaloGameService.java, WeaponDatabase.java)
@@ -67,7 +67,7 @@ cd demos
 ./quick-demo.sh
 ```
 
-## What's Included
+## 📦 What's Included
 
 ### Option 1: Full Game Server Demo (`run_halo_server.py`)
 - **28 Halo Weapons** - Complete weapon database with stats
@@ -92,11 +92,11 @@ cd demos
 | User | user | password | Read/Update |
 | Guest | guest | password | Read only |
 
-## 📡API Endpoints
+## 📡 API Endpoints
 
 ### Halo Game Endpoints (Full Server Only)
 
-#### Weapons
+#### 🔫 Weapons
 ```bash
 GET http://localhost:8080/halo/weapons              # All 28 weapons
 GET http://localhost:8080/halo/weapons/assault_rifle # Specific weapon
@@ -104,14 +104,14 @@ GET http://localhost:8080/halo/weapons/type/KINETIC  # By damage type
 GET http://localhost:8080/halo/weapons/power         # Power weapons only
 ```
 
-#### Player Stats
+#### ⚡ Player Stats
 ```bash
 GET http://localhost:8080/halo/player/985752863/stats    # Player statistics
 GET http://localhost:8080/halo/player/985752863/matches  # Match history
 POST http://localhost:8080/halo/player/stats/update      # Update after match
 ```
 
-#### Leaderboards
+#### 🏆 Leaderboards
 ```bash
 GET http://localhost:8080/halo/leaderboard/kills         # Kill leaders
 GET http://localhost:8080/halo/leaderboard/kdRatio       # K/D leaders
@@ -119,7 +119,7 @@ GET http://localhost:8080/halo/leaderboard/wins          # Win leaders
 GET http://localhost:8080/halo/leaderboard/accuracy      # Accuracy leaders
 ```
 
-#### Maps/Forge
+#### 📍Maps/Forge
 ```bash
 GET http://localhost:8080/halo/maps/browse               # All custom maps
 GET http://localhost:8080/halo/maps/{id}/download        # Download map
@@ -135,7 +135,7 @@ DELETE http://localhost:8080/halo/matchmaking/queue      # Leave queue
 POST http://localhost:8080/halo/match/complete           # End match
 ```
 
-### GameAuth Endpoints (Both Servers)
+#### 	🖥️ GameAuth Endpoints (Both Servers)
 
 ```bash
 GET http://localhost:8080/gameusers                      # List users
@@ -302,7 +302,7 @@ REST_API_Game_Demo/
         └── DemoController.cs  # Demo UI controller
 ```
 
-## Building from Source
+## 📦 Building from Source
 
 ```bash
 cd java-rest-api
@@ -332,7 +332,7 @@ cd ../demos
 curl -u player:password http://localhost:8080/halo/weapons
 ```
 
-## Technical Skills Demonstrated
+## 🧠 Technical Skills Demonstrated
 
 ### Backend Development
 - **Enterprise Architecture** - Clean separation of concerns
@@ -360,7 +360,7 @@ Default configuration runs on port 8080. Both servers use the same JAR.
 3. Enable HTTPS in configuration
 4. Use proper secrets management
 
-## Troubleshooting
+## ⚠️Troubleshooting
 
 | Problem | Solution |
 |---------|----------|
@@ -370,7 +370,8 @@ Default configuration runs on port 8080. Both servers use the same JAR.
 | Server won't start | Check `java-rest-api/server.log` |
 | Demos fail | Ensure server is running first |
 
-## Technologies Used
+## ☕️ Technologies Used
+
 
 - **Java 8** - Core programming language
 - **Dropwizard 2.0** - Production-ready REST framework
@@ -379,7 +380,7 @@ Default configuration runs on port 8080. Both servers use the same JAR.
 - **HTTP Basic Auth** - Security implementation
 - **In-Memory Database** - Fast development iteration
 
-## Author
+## 👨‍💻 Author
 
 **Justin Guida** - Full Stack Developer
 
@@ -398,6 +399,7 @@ cd java-rest-api && python3 run_halo_server.py
 
 
 Then visit http://localhost:8080/halo/weapons in your browser.
+
 
 
 
