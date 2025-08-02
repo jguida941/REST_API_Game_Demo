@@ -9,18 +9,18 @@
 **A professional demonstration of RESTful API design using Java, Dropwizard, and enterprise-grade architecture patterns. This project showcases backend engineering skills through the development of a fully functional multiplayer game server system with proper role-based access control, session management, and authentication logic. Still plan on adding features**
 
 > **Note:** Frontend not included. This is a backend-only REST API demo implemented in Java (Dropwizard), featuring Python auto-launchers for automated testing, endpoint verification, and orchestration.
-## Purpose
+## 🎯Purpose
 
 This repository demonstrates my expertise in building scalable, production-ready REST APIs. While themed around a game platform for engagement, it exemplifies real-world backend development practices including authentication, data modeling, API design, and system architecture that apply to any enterprise application.
 
-  ### Core Technology :
+  ### Core Technology
 
   - Language: Java 8
   - Framework: Dropwizard 2.0 (enterprise-grade REST framework)
   - Build Tool: Maven
   - API Type: RESTful API with JSON responses
 
-  ### Java REST API:
+  ### Java REST API
 
   1. Backend is 100% Java - All the source code in java-rest-api/src/main/java/
   2. REST Endpoints - 25+ RESTful endpoints following HTTP standards:
@@ -29,13 +29,13 @@ This repository demonstrates my expertise in building scalable, production-ready
     - Proper HTTP status codes
   3. Dropwizard Framework - Production-ready Java framework for building REST APIs
 
-  ### Python Scripts Launchers:
+  ### Python Scripts Launchers
 
   - run_halo_server.py and run_server.py are only used to start the Java server
   - They execute: java -jar gameauth-0.0.1-SNAPSHOT.jar server config.yml
   - The actual server and all business logic is Java
 
-  ### Java Components:
+  ### Java Components
 
   - Controllers - Handle HTTP requests (HaloGameResource.java, GameUserRESTController.java)
   - Services - Business logic (HaloGameService.java, WeaponDatabase.java)
@@ -127,7 +127,7 @@ POST http://localhost:8080/halo/maps/upload              # Upload new map
 POST http://localhost:8080/halo/maps/{id}/rate           # Rate a map
 ```
 
-#### Matchmaking
+#### 🎲 Matchmaking
 ```bash
 POST http://localhost:8080/halo/matchmaking/queue        # Join queue
 GET http://localhost:8080/halo/matchmaking/status        # Check status
@@ -349,7 +349,7 @@ curl -u player:password http://localhost:8080/halo/weapons
 - **User Content** - Custom map support
 - **Social Features** - Leaderboards and history
 
-## Deployment
+## 🌍Deployment
 
 ### Local Development
 Default configuration runs on port 8080. Both servers use the same JAR.
@@ -385,7 +385,7 @@ Default configuration runs on port 8080. Both servers use the same JAR.
 
 This project was created to demonstrate enterprise-level backend development skills. While the theme is gaming-related for engagement, the patterns and practices shown here apply directly to real-world applications in finance, healthcare, e-commerce, and other industries.
 
-## License
+## 🧾License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
@@ -398,6 +398,7 @@ cd java-rest-api && python3 run_halo_server.py
 
 
 Then visit http://localhost:8080/halo/weapons in your browser.
+
 
 
 
