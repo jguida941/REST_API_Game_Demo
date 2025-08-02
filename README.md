@@ -1,7 +1,13 @@
-# REST_API_Game_Demo
+# RESTful Multiplayer Game API (Backend Only)
+![Java](https://img.shields.io/badge/Java-8+-red)
+![Dropwizard](https://img.shields.io/badge/Dropwizard-2.0-blue)
+![License: MIT](https://img.shields.io/badge/License-MIT-green)
+![Status](https://img.shields.io/badge/Build-Passing-brightgreen)
 
-> **A professional demonstration of RESTful API design using Java, Dropwizard, and enterprise software architecture patterns. This project showcases backend development skills through a fully-functional game server implementation.**
 
+**A professional demonstration of RESTful API design using Java, Dropwizard, and enterprise-grade architecture patterns. This project showcases backend engineering skills through the development of a fully functional multiplayer game server system with proper role-based access control, session management, and authentication logic.**
+
+> **Note:** Frontend not included. This is a backend-only REST API demo implemented in Java (Dropwizard), featuring Python auto-launchers for automated testing, endpoint verification, and orchestration.
 ## Purpose
 
 This repository demonstrates my expertise in building scalable, production-ready REST APIs. While themed around a game platform for engagement, it exemplifies real-world backend development practices including authentication, data modeling, API design, and system architecture that apply to any enterprise application.
@@ -342,7 +348,7 @@ Default configuration runs on port 8080. Both servers use the same JAR.
 
 ## Author
 
-**John Guida** - Full Stack Developer
+**Justin Guida** - Full Stack Developer
 
 This project was created to demonstrate enterprise-level backend development skills. While the theme is gaming-related for engagement, the patterns and practices shown here apply directly to real-world applications in finance, healthcare, e-commerce, and other industries.
 
@@ -356,5 +362,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ```bash
 cd java-rest-api && python3 run_halo_server.py
 ```
+
 
 Then visit http://localhost:8080/halo/weapons in your browser.
