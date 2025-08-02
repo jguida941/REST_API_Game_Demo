@@ -9,6 +9,7 @@ import java.sql.*;
 import java.util.*;
 import java.util.Comparator;
 import javax.sql.DataSource;
+import java.time.LocalDateTime;
 
 /**
  * CustomMapDAO - Handles database operations for Forge custom maps
@@ -27,7 +28,174 @@ public class CustomMapDAO {
     
     // In-memory storage for testing
     private static final Map<Long, CustomMap> IN_MEMORY_MAPS = new HashMap<>();
-    private static Long nextMapId = 1L;
+    private static Long nextMapId = 100L;
+    
+    // Initialize with sample maps
+    static {
+        initializeSampleMaps();
+    }
+    
+    private static void initializeSampleMaps() {
+        // Blood Gulch Redux - Classic remake
+        CustomMap bloodGulch = new CustomMap();
+        bloodGulch.setId(1L);
+        bloodGulch.setMapName("Blood Gulch Redux");
+        bloodGulch.setAuthorId(92668751L); // admin
+        bloodGulch.setAuthorGamertag("admin");
+        bloodGulch.setBaseMap(BaseMapType.VALHALLA);
+        bloodGulch.setGameMode("Team Slayer");
+        bloodGulch.setDescription("Classic remake of the legendary Blood Gulch with updated weapon placements");
+        bloodGulch.setRating(4.8);
+        // Rating count not stored separately
+        bloodGulch.setDownloadCount(15420);
+        bloodGulch.setCreatedAt(java.time.LocalDateTime.now().minusDays(90));
+        bloodGulch.setTags(Arrays.asList("classic", "remake", "vehicles", "btb"));
+        IN_MEMORY_MAPS.put(1L, bloodGulch);
+        
+        // Lockout Classic - Competitive favorite
+        CustomMap lockout = new CustomMap();
+        lockout.setId(2L);
+        lockout.setMapName("Lockout Classic");
+        lockout.setAuthorId(985752863L); // player
+        lockout.setAuthorGamertag("player");
+        lockout.setBaseMap(BaseMapType.BLACKOUT);
+        lockout.setGameMode("Ranked Arena");
+        lockout.setDescription("Pixel-perfect recreation of Halo 2's most competitive map");
+        lockout.setRating(4.9);
+        // Rating count not stored separately
+        lockout.setDownloadCount(28934);
+        lockout.setCreatedAt(java.time.LocalDateTime.now().minusDays(60));
+        lockout.setTags(Arrays.asList("competitive", "mlg", "arena", "classic"));
+        IN_MEMORY_MAPS.put(2L, lockout);
+        
+        // Valhalla Remastered - BTB favorite
+        CustomMap valhalla = new CustomMap();
+        valhalla.setId(3L);
+        valhalla.setMapName("Valhalla Remastered");
+        valhalla.setAuthorId(92668751L);
+        valhalla.setAuthorGamertag("admin");
+        valhalla.setBaseMap(BaseMapType.VALHALLA);
+        valhalla.setGameMode("Big Team Battle");
+        valhalla.setDescription("Enhanced version with additional vehicle spawns and power weapon locations");
+        valhalla.setRating(4.6);
+        // Rating count not stored separately
+        valhalla.setDownloadCount(12103);
+        valhalla.setCreatedAt(java.time.LocalDateTime.now().minusDays(45));
+        valhalla.setTags(Arrays.asList("btb", "vehicles", "remake", "epic"));
+        IN_MEMORY_MAPS.put(3L, valhalla);
+        
+        // The Pit Enhanced - Training ground
+        CustomMap thePit = new CustomMap();
+        thePit.setId(4L);
+        thePit.setMapName("The Pit Enhanced");
+        thePit.setAuthorId(985752863L);
+        thePit.setAuthorGamertag("player");
+        thePit.setBaseMap(BaseMapType.THE_PIT);
+        thePit.setGameMode("Team Slayer");
+        thePit.setDescription("Training facility with improved sight lines and weapon balance");
+        thePit.setRating(4.5);
+        // Rating count not stored separately
+        thePit.setDownloadCount(8921);
+        thePit.setCreatedAt(java.time.LocalDateTime.now().minusDays(30));
+        thePit.setTags(Arrays.asList("balanced", "training", "competitive"));
+        IN_MEMORY_MAPS.put(4L, thePit);
+        
+        // Zanzibar Fortress - Asymmetric gameplay
+        CustomMap zanzibar = new CustomMap();
+        zanzibar.setId(5L);
+        zanzibar.setMapName("Zanzibar Fortress");
+        zanzibar.setAuthorId(92668751L);
+        zanzibar.setAuthorGamertag("admin");
+        zanzibar.setBaseMap(BaseMapType.LAST_RESORT);
+        zanzibar.setGameMode("Assault");
+        zanzibar.setDescription("Asymmetric fortress defense with multiple attack routes");
+        zanzibar.setRating(4.7);
+        // Rating count not stored separately
+        zanzibar.setDownloadCount(13567);
+        zanzibar.setCreatedAt(java.time.LocalDateTime.now().minusDays(20));
+        zanzibar.setTags(Arrays.asList("asymmetric", "objective", "beach", "fortress"));
+        IN_MEMORY_MAPS.put(5L, zanzibar);
+        
+        // Midship Arena - Close quarters combat
+        CustomMap midship = new CustomMap();
+        midship.setId(6L);
+        midship.setMapName("Midship Arena");
+        midship.setAuthorId(985752863L);
+        midship.setAuthorGamertag("player");
+        midship.setBaseMap(BaseMapType.NARROWS);
+        midship.setGameMode("Free For All");
+        midship.setDescription("Tight corridors and vertical gameplay in a Covenant ship");
+        midship.setRating(4.4);
+        // Rating count not stored separately
+        midship.setDownloadCount(6234);
+        midship.setCreatedAt(java.time.LocalDateTime.now().minusDays(15));
+        midship.setTags(Arrays.asList("arena", "ffa", "covenant", "vertical"));
+        IN_MEMORY_MAPS.put(6L, midship);
+        
+        // Guardian Forest - Nature meets combat
+        CustomMap guardian = new CustomMap();
+        guardian.setId(7L);
+        guardian.setMapName("Guardian Forest");
+        guardian.setAuthorId(92668751L);
+        guardian.setAuthorGamertag("admin");
+        guardian.setBaseMap(BaseMapType.GUARDIAN);
+        guardian.setGameMode("Team Slayer");
+        guardian.setDescription("Forest setting with strategic sniper positions and power weapon control");
+        guardian.setRating(4.3);
+        // Rating count not stored separately
+        guardian.setDownloadCount(3421);
+        guardian.setCreatedAt(java.time.LocalDateTime.now().minusDays(10));
+        guardian.setTags(Arrays.asList("forest", "sniper", "natural", "vertical"));
+        IN_MEMORY_MAPS.put(7L, guardian);
+        
+        // Sandtrap Evolved - Vehicle warfare
+        CustomMap sandtrap = new CustomMap();
+        sandtrap.setId(8L);
+        sandtrap.setMapName("Sandtrap Evolved");
+        sandtrap.setAuthorId(985752863L);
+        sandtrap.setAuthorGamertag("player");
+        sandtrap.setBaseMap(BaseMapType.SANDTRAP);
+        sandtrap.setGameMode("Big Team Battle");
+        sandtrap.setDescription("Massive desert warfare with Elephants, Wraiths, and aerial vehicles");
+        sandtrap.setRating(4.2);
+        // Rating count not stored separately
+        sandtrap.setDownloadCount(2134);
+        sandtrap.setCreatedAt(java.time.LocalDateTime.now().minusDays(5));
+        sandtrap.setTags(Arrays.asList("vehicles", "btb", "desert", "massive"));
+        IN_MEMORY_MAPS.put(8L, sandtrap);
+        
+        // Construct Infinity - Forerunner mystery
+        CustomMap construct = new CustomMap();
+        construct.setId(9L);
+        construct.setMapName("Construct Infinity");
+        construct.setAuthorId(92668751L);
+        construct.setAuthorGamertag("admin");
+        construct.setBaseMap(BaseMapType.NARROWS);
+        construct.setGameMode("King of the Hill");
+        construct.setDescription("Floating Forerunner structure with dynamic map elements");
+        construct.setRating(4.0);
+        // Rating count not stored separately
+        construct.setDownloadCount(1245);
+        construct.setCreatedAt(java.time.LocalDateTime.now().minusDays(3));
+        construct.setTags(Arrays.asList("forerunner", "floating", "koth", "dynamic"));
+        IN_MEMORY_MAPS.put(9L, construct);
+        
+        // Blackout Stealth - Tactical gameplay
+        CustomMap blackout = new CustomMap();
+        blackout.setId(10L);
+        blackout.setMapName("Blackout Stealth");
+        blackout.setAuthorId(985752863L);
+        blackout.setAuthorGamertag("player");
+        blackout.setBaseMap(BaseMapType.BLACKOUT);
+        blackout.setGameMode("SWAT");
+        blackout.setDescription("Dark urban environment perfect for tactical SWAT gameplay");
+        blackout.setRating(3.9);
+        // Rating count not stored separately
+        blackout.setDownloadCount(892);
+        blackout.setCreatedAt(java.time.LocalDateTime.now().minusDays(1));
+        blackout.setTags(Arrays.asList("dark", "tactical", "swat", "urban"));
+        IN_MEMORY_MAPS.put(10L, blackout);
+    }
     
     /**
      * Constructor

@@ -218,29 +218,34 @@ authenticate_user() {
     read -s PASSWORD
     echo
     
-    # Test authentication
+    # Test authentication using gameusers endpoint (works for all authenticated users)
     echo -ne "\n${CYAN}Authenticating...${RESET} "
-    AUTH_TEST=$(curl -s -w "\\nHTTP_CODE:%{http_code}" -u "$USERNAME:password" "$BASE_URL/halo/player/985752863/stats" 2>/dev/null)
+    AUTH_TEST=$(curl -s -w "\\nHTTP_CODE:%{http_code}" -u "$USERNAME:$PASSWORD" "$BASE_URL/gameusers" 2>/dev/null)
     HTTP_CODE=$(echo "$AUTH_TEST" | grep "HTTP_CODE" | cut -d: -f2)
     
     if [ "$HTTP_CODE" = "200" ]; then
         echo -e "${GREEN}✓ Authentication successful!${RESET}"
         export DEMO_USERNAME="$USERNAME"
-        export DEMO_PASSWORD="password"
-        export DEMO_CREDENTIALS="$USERNAME:password"
+        export DEMO_PASSWORD="$PASSWORD"
+        export DEMO_CREDENTIALS="$USERNAME:$PASSWORD"
         
-        # Extract player info
-        PLAYER_DATA=$(echo "$AUTH_TEST" | sed '/HTTP_CODE/d')
-        PLAYER_ID=$(echo "$PLAYER_DATA" | jq -r '.playerId // "985752863"' 2>/dev/null)
-        GAMERTAG=$(echo "$PLAYER_DATA" | jq -r '.gamertag // "'$USERNAME'"' 2>/dev/null)
-        export DEMO_PLAYER_ID="$PLAYER_ID"
-        export DEMO_GAMERTAG="$GAMERTAG"
+        # Set player info based on username
+        if [ "$USERNAME" = "admin" ]; then
+            export DEMO_PLAYER_ID="92668751"
+            export DEMO_GAMERTAG="admin"
+        elif [ "$USERNAME" = "player" ]; then
+            export DEMO_PLAYER_ID="985752863"
+            export DEMO_GAMERTAG="player"
+        else
+            export DEMO_PLAYER_ID="1"
+            export DEMO_GAMERTAG="$USERNAME"
+        fi
         
-        echo -e "${GREEN}Welcome, $GAMERTAG!${RESET}"
+        echo -e "${GREEN}Welcome, $DEMO_GAMERTAG!${RESET}"
         return 0
     else
         echo -e "${RED}✗ Authentication failed!${RESET}"
-        echo -e "${YELLOW}Please try again or use one of the demo accounts.${RESET}"
+        echo -e "${YELLOW}Please try again. Default password for all users is: password${RESET}"
         return 1
     fi
 }

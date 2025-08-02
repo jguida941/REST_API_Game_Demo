@@ -109,9 +109,10 @@ public class HaloGameResource {
     public Response getMatchHistory(@Auth GameUser auth,
                                    @PathParam("id") Long playerId,
                                    @QueryParam("limit") @DefaultValue("20") int limit) {
-        // TODO: Implement match history
-        // For now, return empty list
-        return Response.ok(new ArrayList<>()).build();
+        // Get match history from service
+        List<MatchResult> matches = gameService.getPlayerMatchHistory(playerId, limit);
+        
+        return Response.ok(matches).build();
     }
     
     /**

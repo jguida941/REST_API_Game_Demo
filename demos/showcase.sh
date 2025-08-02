@@ -1,4 +1,6 @@
 #!/bin/bash
+# MASTER SHOWCASE SCRIPT
+# Demonstrates: Full backend capabilities with visual presentation
 
 # Colors
 CYAN='\033[96m'

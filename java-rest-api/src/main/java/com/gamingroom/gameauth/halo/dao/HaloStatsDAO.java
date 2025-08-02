@@ -201,21 +201,30 @@ public class HaloStatsDAO {
             List<PlayerStats> allStats = new ArrayList<>(IN_MEMORY_STATS.values());
             
             // Sort by the requested stat
-            switch (stat) {
+            switch (stat != null ? stat.toLowerCase() : "kills") {
                 case "kills":
                     allStats.sort((a, b) -> b.getTotalKills().compareTo(a.getTotalKills()));
                     break;
                 case "kd":
+                case "kdratio":
                     allStats.sort((a, b) -> Double.compare(b.getKdRatio(), a.getKdRatio()));
                     break;
                 case "wins":
+                case "matcheswon":
                     allStats.sort((a, b) -> b.getMatchesWon().compareTo(a.getMatchesWon()));
                     break;
+                case "deaths":
+                    allStats.sort((a, b) -> b.getTotalDeaths().compareTo(a.getTotalDeaths()));
+                    break;
+                case "accuracy":
+                    allStats.sort((a, b) -> b.getRankLevel().compareTo(a.getRankLevel())); // Using rank as proxy
+                    break;
                 case "rank":
+                case "ranklevel":
                     allStats.sort((a, b) -> b.getRankLevel().compareTo(a.getRankLevel()));
                     break;
                 default:
-                    allStats.sort((a, b) -> b.getRankXP().compareTo(a.getRankXP()));
+                    allStats.sort((a, b) -> b.getTotalKills().compareTo(a.getTotalKills()));
             }
             
             // Return limited results
@@ -225,23 +234,32 @@ public class HaloStatsDAO {
         // Database query for production
         // Determine what column to sort by based on the stat parameter
         String orderByColumn;
-        switch (stat) {
+        switch (stat != null ? stat.toLowerCase() : "kills") {
             case "kills":
                 orderByColumn = "total_kills";
                 break;
             case "kd":
+            case "kdratio":
                 // Calculate K/D ratio in the query
                 // CAST ensures decimal division, NULLIF prevents divide by zero
                 orderByColumn = "(CAST(total_kills AS DECIMAL) / NULLIF(total_deaths, 0))";
                 break;
             case "wins":
+            case "matcheswon":
                 orderByColumn = "matches_won";
                 break;
+            case "deaths":
+                orderByColumn = "total_deaths";
+                break;
+            case "accuracy":
+                orderByColumn = "rank_level"; // Using rank as proxy for accuracy
+                break;
             case "rank":
+            case "ranklevel":
                 orderByColumn = "rank_level";
                 break;
             default:
-                orderByColumn = "rank_xp";
+                orderByColumn = "total_kills";
         }
         
         // Build the SQL query with dynamic ORDER BY

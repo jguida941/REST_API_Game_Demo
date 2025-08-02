@@ -46,7 +46,7 @@ print("\033[38;5;202m" + """
     ░  \033[38;5;208m╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗██║  ██║╚██████╔╝   ██║   ██║  ██║\033[38;5;202m
     ░  \033[38;5;214m ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝    ╚═╝   ╚═╝  ╚═╝\033[38;5;202m
     ░                                                                 ░
-░               \033[38;5;208m◆ ◇ ◆  REST API FOR GAME SERVER DEMO  ◆ ◇ ◆\033[38;5;202m              ░
+░               \033[38;5;208m◆ ◇ ◆  BASIC GAMEAUTH DEMO (NOT HALO)  ◆ ◇ ◆\033[38;5;202m              ░
     ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 """ + "\033[0m")
 
@@ -71,7 +71,7 @@ print_box_line(f"                    \033[38;5;208mLogin Instructions\033[0m    
 print_horizontal_border('═')
 print_box_line("")
 print_box_line(f"  \033[97mSimply:\033[0m                                                  ")
-print_box_line(f"  \033[38;5;208m▸\033[0m Paste into browser: \033[93mlocalhost:8080\033[0m                     ")
+print_box_line(f"  \033[38;5;208m▸\033[0m Browser login: \033[93mlocalhost:8080/gameusers\033[0m              ")
 print_box_line(f"  \033[38;5;208m▸\033[0m Use provided logins below to test the system           ")
 print_box_line(f"  \033[38;5;208m▸\033[0m Test API endpoints and manage user data                ")
 print_box_line("")
@@ -94,10 +94,27 @@ print_box_line("")
 print_horizontal_border('═')
 print_box_line(f"                    \033[38;5;208mAPI Endpoints\033[0m                          ")
 print_horizontal_border('═')
-print_box_line(f"  \033[38;5;208m▸\033[0m Main Login Page: \033[93mhttp://localhost:8080/gameusers\033[0m      ")
-print_box_line(f"  \033[38;5;208m▸\033[0m Status Check: \033[93mhttp://localhost:8080/status\033[0m          ")
-print_box_line(f"  \033[38;5;208m▸\033[0m Health Monitor: \033[93mhttp://localhost:8081/healthcheck\033[0m   ")
-print_horizontal_border('═')
+print_box_line(f"  \033[92mTest These Endpoints in Your Browser:\033[0m                   ")
+print_box_line("")
+print_box_line(f"  \033[94mNo Auth Required:\033[0m                                       ")
+print_box_line(f"  \033[38;5;208m▸\033[0m \033[93mhttp://localhost:8080/gameusers\033[0m                ")
+print_box_line("")
+print_box_line(f"  \033[94mBasic GameAuth Endpoints:\033[0m                               ")
+print_box_line(f"  \033[38;5;208m▸\033[0m \033[93mhttp://localhost:8080/gameusers\033[0m                  ")
+print_box_line(f"  \033[38;5;208m▸\033[0m \033[93mhttp://localhost:8080/gameusers/1\033[0m                     ")
+print_box_line(f"  \033[38;5;208m▸\033[0m \033[93mhttp://localhost:8080/gameusers/2\033[0m                     ")
+print_box_line("")
+print_box_line(f"  \033[91mRole-Based Access:\033[0m                                      ")
+print_box_line(f"  \033[38;5;208m▸\033[0m \033[93m/gameusers\033[0m:  Login as guest or player:                  ")
+print_box_line(f"  \033[38;5;208m▸\033[0m \033[93m/gameusers/1-3\033[0m: USER & ADMIN access only")
+
+print_box_line("")
+print_box_line(f"  \033[95mWhy this is important\033[0m                                     ")
+print_box_line(f"  This tests the system with different roles/permissions")
+print_box_line(f"  Shows how basic security works in anapplication")
+print_box_line(f"  Different users have diffrent permissions")
+print_box_line(f"  This shows encapsulation in action")
+print_box_line("")
 print_box_line(f"         Press \033[91mCtrl+C\033[0m to terminate server connection        ")
 print_horizontal_border('bottom')
 
@@ -116,5 +133,15 @@ print("\n\033[38;5;239m" + "─" * 60)
 print("\033[38;5;245mServer logs will appear below (this is normal!):\033[0m")
 print("\033[38;5;239m" + "─" * 60 + "\033[0m\n")
 
+# Check for Java 17
+java_cmd = "java"
+if os.path.exists("/Library/Java/JavaVirtualMachines/openjdk-17.jdk/Contents/Home/bin/java"):
+    java_cmd = "/Library/Java/JavaVirtualMachines/openjdk-17.jdk/Contents/Home/bin/java"
+    print(f"\033[92m✓ Using Java 17\033[0m\n")
+
 # Run the Java server (this will run until you stop it)
-subprocess.run(["java", "-jar", "target/gameauth-0.0.1-SNAPSHOT.jar", "server", "config.yml"])
+try:
+    subprocess.run([java_cmd, "-jar", "target/gameauth-0.0.1-SNAPSHOT.jar", "server", "config.yml"])
+except KeyboardInterrupt:
+    print("\n\n\033[91mServer stopped by user\033[0m")
+    sys.exit(0)

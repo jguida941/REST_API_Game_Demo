@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # ONE-LINER DEMO LAUNCHER
+# Demonstrates: Complete end-to-end testing of all Halo backend features
 # Run with: bash demos/demo.sh && tail -n 50 logs/demo_summary.log
 
 # Fancy startup
@@ -27,7 +28,7 @@ SUMMARY_LOG="$LOG_DIR/demo_summary.log"
 
 # Execute with style
 echo -e "\033[92m► Running ALL demos...\033[0m"
-bash demos/run-all-demos.sh 2>&1 | tee "$SUMMARY_LOG"
+bash ./run-all-demos.sh 2>&1 | tee "$SUMMARY_LOG"
 
 # Completion
 echo ""

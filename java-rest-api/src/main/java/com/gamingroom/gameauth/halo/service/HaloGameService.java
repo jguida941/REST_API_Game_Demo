@@ -295,6 +295,17 @@ public class HaloGameService {
     public List<Weapon> getPowerWeapons() {
         return WeaponDatabase.getPowerWeapons();
     }
+    
+    /**
+     * Get player's match history
+     * 
+     * @param playerId The player's ID
+     * @param limit Maximum number of matches to return
+     * @return List of recent matches
+     */
+    public List<MatchResult> getPlayerMatchHistory(Long playerId, int limit) {
+        return matchDAO.getPlayerMatchHistory(playerId, limit);
+    }
 }
 
 /**
