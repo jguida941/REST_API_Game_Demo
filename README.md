@@ -1,4 +1,5 @@
-# RESTful Multiplayer Game API (Backend)
+# RESTful Multiplayer Game API (Backend) 📡
+
 ![Java](https://img.shields.io/badge/Java-8+-red)
 ![Dropwizard](https://img.shields.io/badge/Dropwizard-2.0-blue)
 ![License: MIT](https://img.shields.io/badge/License-MIT-green)
@@ -12,7 +13,38 @@
 
 This repository demonstrates my expertise in building scalable, production-ready REST APIs. While themed around a game platform for engagement, it exemplifies real-world backend development practices including authentication, data modeling, API design, and system architecture that apply to any enterprise application.
 
-## Quick Start 
+  ### Core Technology :
+
+  - Language: Java 8
+  - Framework: Dropwizard 2.0 (enterprise-grade REST framework)
+  - Build Tool: Maven
+  - API Type: RESTful API with JSON responses
+
+  ### Java REST API:
+
+  1. Backend is 100% Java - All the source code in java-rest-api/src/main/java/
+  2. REST Endpoints - 25+ RESTful endpoints following HTTP standards:
+    - GET, POST, PUT, DELETE methods
+    - JSON request/response format
+    - Proper HTTP status codes
+  3. Dropwizard Framework - Production-ready Java framework for building REST APIs
+
+  ### Python Scripts Launchers:
+
+  - run_halo_server.py and run_server.py are only used to start the Java server
+  - They execute: java -jar gameauth-0.0.1-SNAPSHOT.jar server config.yml
+  - The actual server and all business logic is Java
+
+  ### Java Components:
+
+  - Controllers - Handle HTTP requests (HaloGameResource.java, GameUserRESTController.java)
+  - Services - Business logic (HaloGameService.java, WeaponDatabase.java)
+  - DAOs - Data access (CustomMapDAO.java, HaloStatsDAO.java)
+  - Models - Data structures (PlayerStats.java, Weapon.java, MatchResult.java)
+  - Auth - Security (GameAuthenticator.java, GameAuthorizer.java)
+
+
+## 🚀 Quick Start 
 
 ```bash
 # 1. Clone and setup
@@ -51,7 +83,7 @@ cd demos
 - **User Management** - CRUD operations
 - **Security Demo** - Shows authentication patterns
 
-## Login Credentials
+## 🔐 Login Credentials
 
 | Role | Username | Password | Access Level |
 |------|----------|----------|--------------|
@@ -60,7 +92,7 @@ cd demos
 | User | user | password | Read/Update |
 | Guest | guest | password | Read only |
 
-## API Endpoints
+## 📡API Endpoints
 
 ### Halo Game Endpoints (Full Server Only)
 
@@ -114,7 +146,7 @@ DELETE http://localhost:8080/gameusers/{id}              # Delete user
 GET http://localhost:8080/status                         # API status
 ```
 
-## Demo Scripts (29 Total)
+## 📈 Demo Scripts (29 Total)
 
 ### Quick Tests
 ```bash
@@ -181,7 +213,7 @@ cd demos/advanced
 ./demo-intelligence-engine.sh
 ```
 
-## Project Structure
+## 🛠️ Project Structure
 
 ```
 REST_API_Game_Demo/
@@ -277,7 +309,7 @@ cd java-rest-api
 mvn clean package
 ```
 
-## Testing Everything
+## 🧪Testing Everything
 
 ```bash
 # 1. Test setup script
@@ -366,6 +398,7 @@ cd java-rest-api && python3 run_halo_server.py
 
 
 Then visit http://localhost:8080/halo/weapons in your browser.
+
 
 
 
