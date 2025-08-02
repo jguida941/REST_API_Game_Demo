@@ -1,4 +1,4 @@
-# HALO GAME PLATFORM - Enterprise REST API Demo
+# REST_API_Game_Demo
 
 > **A professional demonstration of RESTful API design using Java, Dropwizard, and enterprise software architecture patterns. This project showcases backend development skills through a fully-functional game server implementation.**
 
@@ -10,8 +10,8 @@ This repository demonstrates my expertise in building scalable, production-ready
 
 ```bash
 # 1. Clone and setup
-git clone https://github.com/jguida941/halo-game-platform.git
-cd halo-game-platform
+git clone https://github.com/jguida941/REST_API_Game_Demo.git
+cd REST_API_Game_Demo
 ./setup.sh
 
 # 2. Choose your server:
@@ -177,41 +177,87 @@ cd demos/advanced
 ## Project Structure
 
 ```
-halo-game-platform/
+REST_API_Game_Demo/
 ├── README.md                    # This file
+├── LICENSE                      # MIT License
 ├── setup.sh                     # First-time setup script
 ├── .gitignore                   # Git ignore rules
 │
 ├── java-rest-api/               # Backend server
-│   ├── run_halo_server.py      # Full Halo server launcher
+│   ├── README.md               # Server-specific readme
+│   ├── run_halo_server.py      # Full game server launcher
 │   ├── run_server.py           # Basic auth server launcher
 │   ├── pom.xml                 # Maven configuration
 │   ├── config.yml              # Server configuration
 │   ├── target/
-│   │   └── gameauth-0.0.1-SNAPSHOT.jar  # Pre-built server
-│   ├── src/
-│   │   └── main/java/          # Source code
-│   │       └── com/gamingroom/gameauth/
-│   │           ├── auth/       # Authentication system
-│   │           ├── controller/ # REST endpoints
-│   │           ├── dao/        # Data access layer
-│   │           └── halo/       # Halo game features
-│   └── docs/                   # Additional documentation
+│   │   └── gameauth-0.0.1-SNAPSHOT.jar  # Pre-built server JAR
+│   └── src/
+│       └── main/java/com/gamingroom/gameauth/
+│           ├── GameAuthApplication.java    # Main application
+│           ├── GameAuthConfiguration.java  # Configuration
+│           ├── auth/                       # Authentication system
+│           │   ├── GameAuthenticator.java
+│           │   ├── GameAuthorizer.java
+│           │   └── GameUser.java
+│           ├── controller/                 # REST endpoints
+│           │   ├── GameUserRESTController.java
+│           │   └── RESTClientController.java
+│           ├── dao/                        # Data access
+│           │   └── GameUserDB.java
+│           ├── healthcheck/                # Health monitoring
+│           │   ├── AppHealthCheck.java
+│           │   └── HealthCheckController.java
+│           ├── representations/            # DTOs
+│           │   └── GameUserInfo.java
+│           └── halo/                       # Game features
+│               ├── controller/
+│               │   └── HaloGameResource.java
+│               ├── dao/
+│               │   ├── CustomMapDAO.java
+│               │   ├── HaloStatsDAO.java
+│               │   └── MatchHistoryDAO.java
+│               ├── models/
+│               │   ├── BaseMapType.java
+│               │   ├── CustomMap.java
+│               │   ├── GameMode.java
+│               │   ├── MatchResult.java
+│               │   ├── MatchmakingTicket.java
+│               │   ├── PlayerStats.java
+│               │   ├── Weapon.java
+│               │   └── WeaponStats.java
+│               └── service/
+│                   ├── HaloGameService.java
+│                   └── WeaponDatabase.java
 │
 ├── demos/                      # 29 demo scripts
 │   ├── quick-demo.sh          # Quick API test
 │   ├── showcase.sh            # Full feature tour
 │   ├── run-all-demos.sh       # Run everything
-│   ├── auth/                  # Auth demos
-│   ├── stats/                 # Stats demos
+│   ├── demo.sh                # One-liner demo
+│   ├── auth/                  # Authentication demos
+│   │   └── demo-auth.sh
+│   ├── stats/                 # Statistics demos
+│   │   └── demo-stats.sh
 │   ├── matchmaking/           # Matchmaking demos
-│   ├── maps/                  # Map demos
+│   │   └── demo-matchmaking.sh
+│   ├── maps/                  # Map/Forge demos
+│   │   └── demo-maps.sh
 │   ├── leaderboard/           # Leaderboard demos
+│   │   └── demo-leaderboard.sh
 │   ├── performance/           # Performance demos
+│   │   └── demo-performance.sh
 │   ├── integration/           # Integration demos
-│   └── advanced/              # Advanced demos
+│   │   └── demo-integration.sh
+│   └── advanced/              # Advanced demos (7 scripts)
+│       ├── demo-ai-matchmaking.sh
+│       ├── demo-forge-workshop.sh
+│       ├── demo-full-session.sh
+│       ├── demo-intelligence-engine.sh
+│       ├── demo-performance-stress.sh
+│       ├── demo-security-auth.sh
+│       └── demo-weapon-meta.sh
 │
-└── demo-showcase/             # Unity integration files
+└── demo-showcase/             # Unity integration example
     └── DemoScripts/
         ├── UnityRestClient.cs # Unity C# API client
         └── DemoController.cs  # Demo UI controller
