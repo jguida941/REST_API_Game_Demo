@@ -41,7 +41,5 @@ The JAR is already built and included in `target/gameauth-0.0.1-SNAPSHOT.jar`
 mvn clean package
 ```
 
-## Documentation
 
-Additional documentation is available in the `docs/` directory.
 
