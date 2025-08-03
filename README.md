@@ -287,7 +287,7 @@ REST_API_Game_Demo/
 │   │   └── demo-performance.sh
 │   ├── integration/           # Integration demos
 │   │   └── demo-integration.sh
-│   └── advanced/              # Advanced demos (7 scripts)
+│   └── advanced/              # Advanced demos
 │       ├── demo-ai-matchmaking.sh
 │       ├── demo-forge-workshop.sh
 │       ├── demo-full-session.sh
@@ -412,6 +412,7 @@ cd java-rest-api && python3 run_halo_server.py
 
 
 Then visit http://localhost:8080/halo/weapons in your browser.
+
 
 
 
