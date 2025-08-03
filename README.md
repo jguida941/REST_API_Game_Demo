@@ -268,7 +268,7 @@ REST_API_Game_Demo/
 │                   ├── HaloGameService.java
 │                   └── WeaponDatabase.java
 │
-├── demos/                      # 29 demo scripts
+├── demos/                      # Demo scripts
 │   ├── quick-demo.sh          # Quick API test
 │   ├── showcase.sh            # Full feature tour
 │   ├── run-all-demos.sh       # Run everything
@@ -412,6 +412,7 @@ cd java-rest-api && python3 run_halo_server.py
 
 
 Then visit http://localhost:8080/halo/weapons in your browser.
+
 
 
 
