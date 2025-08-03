@@ -2,7 +2,7 @@
 
 ![Java](https://img.shields.io/badge/Java-8+-red)
 ![Dropwizard](https://img.shields.io/badge/Dropwizard-2.0-blue)
-![License: MIT](https://img.shields.io/badge/License-MIT-green)
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC--BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
 ![Status](https://img.shields.io/badge/Build-Passing-brightgreen)
 
 
@@ -388,7 +388,20 @@ This project was created to demonstrate enterprise-level backend development ski
 
 ## 🧾License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+Creative Commons Attribution-NonCommercial 4.0 International
+
+This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License. 
+To view a copy of this license, visit https://creativecommons.org/licenses/by-nc/4.0/
+
+You are free to:
+
+✔️ Share — copy and redistribute the material in any medium or format  
+✔️ Adapt — remix, transform, and build upon the material  
+
+Under the following terms:
+
+📝 Attribution — You must give appropriate credit, provide a link to the license, and indicate if changes were made.  
+🚫 NonCommercial — You may not use the material for commercial purposes.  
 
 ---
 
@@ -399,6 +412,7 @@ cd java-rest-api && python3 run_halo_server.py
 
 
 Then visit http://localhost:8080/halo/weapons in your browser.
+
 
 
 
