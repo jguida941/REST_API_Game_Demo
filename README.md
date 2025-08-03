@@ -146,7 +146,7 @@ DELETE http://localhost:8080/gameusers/{id}              # Delete user
 GET http://localhost:8080/status                         # API status
 ```
 
-## Demo Scripts (29 Total)
+## Demo Scripts
 
 ### Quick Tests
 ```bash
@@ -412,6 +412,7 @@ cd java-rest-api && python3 run_halo_server.py
 
 
 Then visit http://localhost:8080/halo/weapons in your browser.
+
 
 
 
