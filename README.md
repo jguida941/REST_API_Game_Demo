@@ -1,10 +1,9 @@
 #  RESTful Multiplayer Game API (Backend)
 
-![Java](https://img.shields.io/badge/Java-8%2B-%239400D3.svg?style=for-the-badge&logoColor=white)
-![Dropwizard](https://img.shields.io/badge/Dropwizard-2.0-%239400D3.svg?style=for-the-badge&logoColor=white)
-[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC--BY--NC%204.0-%239400D3.svg?style=for-the-badge&logoColor=white)](https://creativecommons.org/licenses/by-nc/4.0/)
-![Status](https://img.shields.io/badge/Build-Passing-%239400D3.svg?style=for-the-badge&logoColor=white)
-
+![Java](https://img.shields.io/badge/Java-8%2B-%239400D3.svg?style=for-the-badge&logo=java&logoColor=white)
+![Dropwizard](https://img.shields.io/badge/Dropwizard-2.0-%239400D3.svg?style=for-the-badge&logo=apache&logoColor=white)
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC--BY--NC%204.0-%239400D3.svg?style=for-the-badge&logo=creativecommons&logoColor=white)](https://creativecommons.org/licenses/by-nc/4.0/)
+![Status](https://img.shields.io/badge/Build-Passing-%239400D3.svg?style=for-the-badge&logo=checkmarx&logoColor=white)
 
 #### A professional demonstration of RESTful API design using Java, Dropwizard, and enterprise-grade architecture patterns. This project showcases backend engineering skills through the development of a fully functional multiplayer game server system with proper role-based access control, session management, and authentication logic. Still plan on adding features 
 
@@ -412,6 +411,7 @@ cd java-rest-api && python3 run_halo_server.py
 
 
 Then visit http://localhost:8080/halo/weapons in your browser.
+
 
 
 
